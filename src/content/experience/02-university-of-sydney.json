@@ -1,12 +1,15 @@
 {
-  "title": "Conjoint Associate Lecturer",
+  "title": "Adjunct Lecturer",
   "company": "University of Sydney",
   "companyUrl": "https://www.sydney.edu.au/",
   "logo": "/logos/usyd.svg",
   "location": "Sydney",
-  "dateStart": "2023-06-15",
+  "dateStart": "2026-06-01",
   "dateEnd": "",
   "current": true,
-  "description": [],
+  "description": [
+    "Faculty of Medicine and Health",
+    "Promoted from Conjoint Associate Lecturer (2023\u20132026)"
+  ],
   "order": 1
 }

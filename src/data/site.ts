@@ -34,7 +34,7 @@ export const site = {
     {
       name: 'The University of Sydney',
       nameShort: 'USyd',
-      role: 'Conjoint Associate Lecturer',
+      role: 'Adjunct Lecturer',
       url: 'https://www.sydney.edu.au/',
       logo: '/logos/usyd.svg',
     },
