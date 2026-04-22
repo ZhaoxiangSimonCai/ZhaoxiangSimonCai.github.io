@@ -1,0 +1,116 @@
+@import '@fontsource-variable/inter/wght.css';
+@import '@fontsource-variable/inter/wght-italic.css';
+@import '@fontsource-variable/fraunces/wght.css';
+@import '@fontsource-variable/fraunces/wght-italic.css';
+@import '@fontsource/jetbrains-mono/400.css';
+@import '@fontsource/jetbrains-mono/500.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --bg: 250 250 247;
+    --surface: 255 255 255;
+    --surface-2: 246 244 237;
+    --fg: 15 17 21;
+    --muted: 91 99 112;
+    --border: 230 228 220;
+    --accent: 200 16 46;
+    --accent-2: 30 90 168;
+    --highlight: 244 233 193;
+  }
+
+  :root.dark {
+    --bg: 11 13 16;
+    --surface: 18 21 26;
+    --surface-2: 25 29 36;
+    --fg: 236 235 228;
+    --muted: 141 147 161;
+    --border: 35 39 46;
+    --accent: 255 74 92;
+    --accent-2: 108 160 232;
+    --highlight: 58 52 24;
+  }
+
+  html {
+    font-family: theme('fontFamily.sans');
+    background: rgb(var(--bg));
+    color: rgb(var(--fg));
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    font-feature-settings: 'cv11', 'ss01', 'ss03';
+  }
+
+  body {
+    min-height: 100vh;
+    line-height: 1.65;
+    font-size: 17px;
+  }
+
+  ::selection {
+    background: rgb(var(--accent) / 0.2);
+    color: rgb(var(--fg));
+  }
+
+  h1, h2, h3, h4 {
+    font-family: theme('fontFamily.display');
+    color: rgb(var(--fg));
+    letter-spacing: -0.015em;
+    line-height: 1.15;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  /* Smooth theme transition (skip motion-reduce users) */
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      transition: background-color 200ms ease;
+    }
+  }
+}
+
+@layer components {
+  .container-page {
+    @apply mx-auto w-full max-w-content px-6 md:px-10 lg:px-12;
+  }
+
+  .link-underline {
+    background-image: linear-gradient(rgb(var(--accent-2)), rgb(var(--accent-2)));
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    background-size: 0 1px;
+    transition: background-size 240ms ease;
+  }
+  .link-underline:hover {
+    background-size: 100% 1px;
+  }
+
+  .chip {
+    @apply inline-flex items-center gap-1.5 rounded-full border border-border bg-surface/60 px-2.5 py-0.5 text-xs font-medium text-muted;
+  }
+
+  .chip-accent {
+    @apply inline-flex items-center gap-1.5 rounded-full border border-accent/30 bg-accent/10 px-2.5 py-0.5 text-xs font-medium text-accent;
+  }
+
+  .surface-card {
+    @apply rounded-lg border border-border bg-surface p-6 transition-colors;
+  }
+
+  .h-display {
+    @apply font-display text-hero font-semibold;
+  }
+
+  .section-label {
+    @apply mb-2 inline-block font-mono text-xs uppercase tracking-[0.14em] text-muted;
+  }
+
+  .section-title {
+    @apply mb-8 font-display text-3xl font-semibold text-fg md:text-4xl;
+  }
+}

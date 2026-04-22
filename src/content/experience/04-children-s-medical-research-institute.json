@@ -1,0 +1,15 @@
+{
+  "title": "Data Scientist",
+  "company": "Children's Medical Research Institute",
+  "companyUrl": "https://www.cmrijeansforgenes.org.au/",
+  "logo": "/logos/cmri.svg",
+  "location": "Westmead",
+  "dateStart": "2019-01-07",
+  "dateEnd": "2020-02-28",
+  "current": false,
+  "description": [
+    "Built pipelines using existing models for single-cell RNA-seq analysis in mouse developmental biology",
+    "Built deep learning models for live-cell imaging data analysis"
+  ],
+  "order": 3
+}

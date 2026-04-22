@@ -1,0 +1,93 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import Section from '~/components/Section.astro';
+import PublicationCard from '~/components/PublicationCard.astro';
+import { sortByDateDesc } from '~/lib/format';
+
+const pubs = sortByDateDesc(await getCollection('publications'));
+
+const byYear = new Map<number, typeof pubs>();
+for (const p of pubs) {
+  const y = p.data.year;
+  if (!byYear.has(y)) byYear.set(y, []);
+  byYear.get(y)!.push(p);
+}
+const years = [...byYear.keys()].sort((a, b) => b - a);
+
+const allTags = [...new Set(pubs.flatMap((p) => p.data.tags))].sort();
+---
+
+<BaseLayout
+  title="Research"
+  description="Peer-reviewed publications by Zhaoxiang (Simon) Cai — cancer data scientist. Cancer Discovery, Nature Communications, Cancer Cell, and more."
+>
+  <Section
+    label="Publications"
+    title="Research"
+    description={`${pubs.length} peer-reviewed publications — filter by theme or browse chronologically.`}
+  >
+    <div class="mb-10 flex flex-wrap items-center gap-2" role="group" aria-label="Filter by tag">
+      <button data-tag="" class="chip-accent data-[active=true]:bg-accent data-[active=true]:text-white" data-active="true">
+        All ({pubs.length})
+      </button>
+      {
+        allTags.map((t) => (
+          <button data-tag={t} class="chip data-[active=true]:bg-accent data-[active=true]:text-white data-[active=true]:border-accent">
+            {t}
+          </button>
+        ))
+      }
+    </div>
+
+    <div class="flex flex-col gap-12">
+      {
+        years.map((year) => (
+          <div data-year={year}>
+            <h2 class="mb-4 font-display text-xl font-semibold text-muted">{year}</h2>
+            <div class="grid gap-4 md:grid-cols-2">
+              {byYear.get(year)!.map((p) => (
+                <div data-pub data-tags={p.data.tags.join('|')}>
+                  <PublicationCard pub={p} />
+                </div>
+              ))}
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </Section>
+</BaseLayout>
+
+<script>
+  const buttons = document.querySelectorAll<HTMLButtonElement>('[data-tag]');
+  const pubs = document.querySelectorAll<HTMLElement>('[data-pub]');
+  const yearGroups = document.querySelectorAll<HTMLElement>('[data-year]');
+
+  const params = new URLSearchParams(location.search);
+  const initial = params.get('tag') ?? '';
+
+  function applyFilter(tag: string) {
+    buttons.forEach((b) => b.setAttribute('data-active', String((b.dataset.tag ?? '') === tag)));
+    pubs.forEach((p) => {
+      const tags = (p.dataset.tags ?? '').split('|');
+      const show = tag === '' || tags.includes(tag);
+      p.style.display = show ? '' : 'none';
+    });
+    yearGroups.forEach((g) => {
+      const anyVisible = g.querySelectorAll<HTMLElement>('[data-pub]').length > 0 && [...g.querySelectorAll<HTMLElement>('[data-pub]')].some(
+        (p) => p.style.display !== 'none'
+      );
+      g.style.display = anyVisible ? '' : 'none';
+    });
+    const url = new URL(location.href);
+    if (tag) url.searchParams.set('tag', tag);
+    else url.searchParams.delete('tag');
+    history.replaceState({}, '', url.toString());
+  }
+
+  buttons.forEach((b) =>
+    b.addEventListener('click', () => applyFilter(b.dataset.tag ?? ''))
+  );
+  applyFilter(initial);
+</script>

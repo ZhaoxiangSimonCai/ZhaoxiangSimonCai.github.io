@@ -1,0 +1,15 @@
+{
+  "title": "PhD Candidate",
+  "company": "University of Sydney / CMRI",
+  "companyUrl": "https://www.sydney.edu.au/",
+  "logo": "/logos/usyd.svg",
+  "location": "Sydney",
+  "dateStart": "2020-03-01",
+  "dateEnd": "2023-02-28",
+  "current": false,
+  "description": [
+    "Thesis: Large-Scale and Pan-Cancer Proteogenomic Analyses with Machine Learning",
+    "Sydney Cancer Partners PhD Scholarship recipient"
+  ],
+  "order": 2
+}

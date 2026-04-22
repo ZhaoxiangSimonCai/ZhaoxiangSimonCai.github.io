@@ -1,0 +1,32 @@
+---
+export interface Props {
+  id?: string;
+  label?: string;
+  title?: string;
+  description?: string;
+  class?: string;
+  bordered?: boolean;
+}
+
+const { id, label, title, description, class: extraClass = '', bordered = false } = Astro.props;
+---
+
+<section
+  id={id}
+  class:list={[
+    'container-page py-16 md:py-24',
+    bordered && 'border-t border-border',
+    extraClass,
+  ]}
+>
+  {
+    (label || title || description) && (
+      <header class="mb-10 max-w-3xl md:mb-14">
+        {label && <span class="section-label">{label}</span>}
+        {title && <h2 class="section-title">{title}</h2>}
+        {description && <p class="max-w-prose text-muted">{description}</p>}
+      </header>
+    )
+  }
+  <slot />
+</section>

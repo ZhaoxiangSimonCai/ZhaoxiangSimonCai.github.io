@@ -1,0 +1,145 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content';
+import { Icon } from 'astro-icon/components';
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import { cleanVenue, doiUrl, authorRole, formatAuthors, formatFullMonthYear } from '~/lib/format';
+import { toBibtex } from '~/lib/bibtex';
+
+export async function getStaticPaths() {
+  const pubs = await getCollection('publications');
+  return pubs.map((pub) => ({ params: { slug: pub.slug }, props: { pub } }));
+}
+
+interface Props {
+  pub: CollectionEntry<'publications'>;
+}
+
+const { pub } = Astro.props;
+const d = pub.data;
+const { Content } = await pub.render();
+const venue = cleanVenue(d.venue);
+const role = authorRole(d);
+const bibtex = toBibtex(pub);
+---
+
+<BaseLayout title={d.title} description={d.abstract ?? `${d.title} — ${venue}, ${d.year}.`}>
+  <article class="container-page py-16 md:py-24">
+    <a href="/research/" class="mb-10 inline-flex items-center gap-1 text-sm text-muted hover:text-fg">
+      <Icon name="lucide:arrow-left" class="h-4 w-4" /> All research
+    </a>
+
+    <header class="max-w-4xl">
+      <div class="flex flex-wrap items-center gap-2 text-xs text-muted">
+        <span class="font-mono uppercase tracking-wide">{formatFullMonthYear(d.date)}</span>
+        <span class="text-border">·</span>
+        <span class="italic">{venue}</span>
+        {d.fwci !== undefined && (
+          <>
+            <span class="text-border">·</span>
+            <span class="font-mono">FWCI {d.fwci.toFixed(2)}</span>
+          </>
+        )}
+        {role && (
+          <>
+            <span class="text-border">·</span>
+            <span class="chip-accent">{role}</span>
+          </>
+        )}
+      </div>
+      <h1 class="mt-4 font-display text-3xl font-semibold leading-tight md:text-4xl lg:text-5xl">
+        {d.title}
+      </h1>
+      <p class="mt-5 text-muted" set:html={formatAuthors(d.authors, 'Zhaoxiang Cai', 20)} />
+
+      <div class="mt-8 flex flex-wrap items-center gap-2">
+        {d.doi && (
+          <a
+            href={doiUrl(d.doi)}
+            class="inline-flex items-center gap-2 rounded-md bg-accent px-4 py-2 text-sm font-medium text-white transition hover:bg-accent/90"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            <Icon name="lucide:link-2" class="h-4 w-4" /> View on publisher
+          </a>
+        )}
+        {d.pdf && (
+          <a
+            href={d.pdf.startsWith('http') ? d.pdf : `/pdfs/${d.pdf}`}
+            class="inline-flex items-center gap-2 rounded-md border border-border bg-surface px-4 py-2 text-sm font-medium transition hover:border-accent hover:text-accent"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            <Icon name="lucide:file-text" class="h-4 w-4" /> PDF
+          </a>
+        )}
+        {d.code && (
+          <a
+            href={d.code}
+            class="inline-flex items-center gap-2 rounded-md border border-border bg-surface px-4 py-2 text-sm font-medium transition hover:border-accent hover:text-accent"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            <Icon name="simple-icons:github" class="h-4 w-4" /> Source
+          </a>
+        )}
+      </div>
+    </header>
+
+    {d.abstract && (
+      <section class="mt-12 max-w-prose border-l-2 border-accent/40 pl-6">
+        <h2 class="section-label">Abstract</h2>
+        <p class="mt-3 leading-relaxed">{d.abstract}</p>
+      </section>
+    )}
+
+    <div class="mt-12 max-w-prose">
+      <Content />
+    </div>
+
+    <section class="mt-16 max-w-3xl">
+      <div class="flex items-center justify-between gap-4">
+        <h2 class="font-display text-lg font-semibold">BibTeX</h2>
+        <button
+          id="copy-bib"
+          type="button"
+          class="inline-flex items-center gap-1.5 rounded-md border border-border bg-surface px-3 py-1.5 text-xs font-medium text-muted transition hover:border-accent hover:text-accent"
+        >
+          <Icon name="lucide:copy" class="h-3.5 w-3.5" />
+          <span id="copy-label">Copy</span>
+        </button>
+      </div>
+      <pre
+        id="bib"
+        class="mt-3 overflow-x-auto rounded-md border border-border bg-surface-2 p-4 text-xs leading-relaxed"
+      ><code>{bibtex}</code></pre>
+    </section>
+
+    {d.tags.length > 0 && (
+      <footer class="mt-12 flex flex-wrap items-center gap-2">
+        {d.tags.map((t) => (
+          <a href={`/research/?tag=${encodeURIComponent(t)}`} class="chip hover:border-accent hover:text-accent">
+            {t}
+          </a>
+        ))}
+      </footer>
+    )}
+  </article>
+</BaseLayout>
+
+<script>
+  const btn = document.getElementById('copy-bib');
+  const label = document.getElementById('copy-label');
+  const pre = document.getElementById('bib');
+  btn?.addEventListener('click', async () => {
+    const text = pre?.innerText ?? '';
+    try {
+      await navigator.clipboard.writeText(text);
+      if (label) label.textContent = 'Copied';
+      setTimeout(() => {
+        if (label) label.textContent = 'Copy';
+      }, 1500);
+    } catch (e) {
+      if (label) label.textContent = 'Copy failed';
+    }
+  });
+</script>

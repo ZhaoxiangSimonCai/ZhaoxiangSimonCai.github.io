@@ -1,0 +1,21 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import Section from '~/components/Section.astro';
+import TalkRow from '~/components/TalkRow.astro';
+import { sortByDateDesc } from '~/lib/format';
+
+const talks = sortByDateDesc(await getCollection('talks'));
+---
+
+<BaseLayout title="Talks" description="Conference presentations, invited talks, and media by Zhaoxiang (Simon) Cai.">
+  <Section
+    label="Speaking"
+    title="Talks & presentations"
+    description="Invited, oral, and poster presentations at international and national conferences."
+  >
+    <div class="max-w-4xl">
+      {talks.map((t) => <TalkRow talk={t} />)}
+    </div>
+  </Section>
+</BaseLayout>

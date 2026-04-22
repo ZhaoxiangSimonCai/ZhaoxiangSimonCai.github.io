@@ -1,0 +1,115 @@
+---
+import { site } from '~/data/site';
+import ThemeToggle from '~/components/ThemeToggle.astro';
+
+const pathname = Astro.url.pathname;
+const isActive = (href: string) => {
+  if (href === '/') return pathname === '/';
+  return pathname.startsWith(href);
+};
+---
+
+<header class="sticky top-0 z-40 border-b border-border bg-bg/85 backdrop-blur">
+  <div class="container-page flex h-16 items-center justify-between gap-6">
+    <a
+      href="/"
+      class="group flex items-center gap-2.5 font-display text-lg font-semibold tracking-tight"
+      aria-label="Home"
+    >
+      <span
+        class="grid h-8 w-8 place-items-center rounded-full bg-accent font-mono text-xs font-medium text-white transition-transform group-hover:scale-105"
+      >
+        ZC
+      </span>
+      <span class="hidden sm:inline">Zhaoxiang Cai</span>
+    </a>
+
+    <nav aria-label="Primary" class="flex items-center gap-1">
+      <ul class="hidden items-center gap-1 md:flex">
+        {
+          site.nav.map((item) => (
+            <li>
+              <a
+                href={item.href}
+                class:list={[
+                  'relative px-3 py-2 text-sm font-medium transition-colors',
+                  isActive(item.href) ? 'text-fg' : 'text-muted hover:text-fg',
+                ]}
+                aria-current={isActive(item.href) ? 'page' : undefined}
+              >
+                {item.label}
+                {isActive(item.href) && (
+                  <span class="absolute inset-x-3 -bottom-px h-px bg-accent" aria-hidden="true" />
+                )}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+
+      <ThemeToggle />
+
+      <button
+        id="menu-toggle"
+        type="button"
+        class="md:hidden rounded-md p-2 text-muted transition hover:bg-surface-2 hover:text-fg"
+        aria-label="Open menu"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="h-5 w-5"
+        >
+          <line x1="4" y1="7" x2="20" y2="7"></line>
+          <line x1="4" y1="12" x2="20" y2="12"></line>
+          <line x1="4" y1="17" x2="20" y2="17"></line>
+        </svg>
+      </button>
+    </nav>
+  </div>
+
+  <div id="mobile-menu" hidden class="border-t border-border md:hidden">
+    <ul class="container-page flex flex-col py-2">
+      {
+        site.nav.map((item) => (
+          <li>
+            <a
+              href={item.href}
+              class:list={[
+                'block px-2 py-3 text-sm font-medium',
+                isActive(item.href) ? 'text-fg' : 'text-muted',
+              ]}
+              aria-current={isActive(item.href) ? 'page' : undefined}
+            >
+              {item.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</header>
+
+<script>
+  const toggle = document.getElementById('menu-toggle');
+  const menu = document.getElementById('mobile-menu');
+  toggle?.addEventListener('click', () => {
+    const open = menu?.hasAttribute('hidden') ? false : true;
+    if (open) {
+      menu?.setAttribute('hidden', '');
+      toggle?.setAttribute('aria-expanded', 'false');
+      toggle?.setAttribute('aria-label', 'Open menu');
+    } else {
+      menu?.removeAttribute('hidden');
+      toggle?.setAttribute('aria-expanded', 'true');
+      toggle?.setAttribute('aria-label', 'Close menu');
+    }
+  });
+</script>

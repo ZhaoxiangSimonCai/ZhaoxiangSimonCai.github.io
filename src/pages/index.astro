@@ -1,0 +1,145 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import Hero from '~/components/Hero.astro';
+import SpotlightStrip from '~/components/SpotlightStrip.astro';
+import Section from '~/components/Section.astro';
+import PublicationCard from '~/components/PublicationCard.astro';
+import ProjectCard from '~/components/ProjectCard.astro';
+import TalkRow from '~/components/TalkRow.astro';
+import CollaboratorLogos from '~/components/CollaboratorLogos.astro';
+import { sortByDateDesc } from '~/lib/format';
+import { Icon } from 'astro-icon/components';
+
+const [allPubs, allProjects, allTalks] = await Promise.all([
+  getCollection('publications'),
+  getCollection('projects'),
+  getCollection('talks'),
+]);
+
+const featuredPubs = sortByDateDesc(allPubs.filter((p) => p.data.featured)).slice(0, 4);
+const featuredProjects = sortByDateDesc(allProjects.filter((p) => p.data.featured)).slice(0, 6);
+const recentTalks = sortByDateDesc(allTalks).slice(0, 4);
+
+const themes = [
+  {
+    title: 'Federated Learning',
+    description:
+      'Privacy-preserving deep learning across multiple hospitals, keeping raw patient data local while sharing only model updates.',
+    tag: 'Federated Learning',
+    icon: 'lucide:network',
+  },
+  {
+    title: 'Generative AI',
+    description:
+      'Variational autoencoders and diffusion models to augment scarce multi-omic datasets and impute missing measurements.',
+    tag: 'Generative AI',
+    icon: 'lucide:sparkles',
+  },
+  {
+    title: 'Multi-omics Integration',
+    description:
+      'End-to-end analysis across proteome, genome, transcriptome and drug response — finding signal the single-omic view misses.',
+    tag: 'Multi-omics',
+    icon: 'lucide:layers',
+  },
+  {
+    title: 'Foundation Models',
+    description:
+      'Proteomic foundation models for multi-hospital cancer research — my current Cancer Institute NSW Fellowship programme.',
+    tag: 'Foundation Models',
+    icon: 'lucide:brain-circuit',
+  },
+];
+---
+
+<BaseLayout>
+  <Hero />
+  <SpotlightStrip />
+
+  <Section
+    label="Research themes"
+    title="What I work on"
+    description="Four threads run through my research — each links through to the related papers and projects."
+  >
+    <div class="grid gap-4 md:grid-cols-2">
+      {
+        themes.map((t) => (
+          <a
+            href={`/research/?tag=${encodeURIComponent(t.tag)}`}
+            class="group flex flex-col gap-3 rounded-lg border border-border bg-surface p-6 transition hover:border-accent/60 hover:shadow-[0_2px_0_rgb(var(--accent))]"
+          >
+            <div class="flex items-center gap-3">
+              <span class="grid h-9 w-9 place-items-center rounded-md bg-accent/10 text-accent">
+                <Icon name={t.icon} class="h-4 w-4" />
+              </span>
+              <h3 class="font-display text-lg font-semibold">{t.title}</h3>
+            </div>
+            <p class="text-sm leading-relaxed text-muted">{t.description}</p>
+            <span class="mt-auto inline-flex items-center gap-1 text-xs font-medium text-accent opacity-0 transition group-hover:opacity-100">
+              Browse papers <Icon name="lucide:arrow-right" class="h-3.5 w-3.5" />
+            </span>
+          </a>
+        ))
+      }
+    </div>
+  </Section>
+
+  <Section
+    label="Featured publications"
+    title="Selected work"
+    description="First and co-first author publications in Cancer Cell, Cancer Discovery, Nature Communications. See the full list on the research page."
+    bordered
+  >
+    <div class="grid gap-4 md:grid-cols-2">
+      {featuredPubs.map((p) => <PublicationCard pub={p} />)}
+    </div>
+    <div class="mt-8">
+      <a
+        href="/research/"
+        class="inline-flex items-center gap-1.5 text-sm font-medium text-accent hover:opacity-80"
+      >
+        All publications <Icon name="lucide:arrow-right" class="h-4 w-4" />
+      </a>
+    </div>
+  </Section>
+
+  {featuredProjects.length > 0 && (
+    <Section
+      label="Projects"
+      title="Selected projects"
+      description="Code, datasets, and research artefacts."
+      bordered
+    >
+      <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {featuredProjects.map((p) => <ProjectCard project={p} />)}
+      </div>
+      <div class="mt-8">
+        <a
+          href="/projects/"
+          class="inline-flex items-center gap-1.5 text-sm font-medium text-accent hover:opacity-80"
+        >
+          All projects <Icon name="lucide:arrow-right" class="h-4 w-4" />
+        </a>
+      </div>
+    </Section>
+  )}
+
+  <Section label="Talks" title="Recent presentations" bordered>
+    <div class="max-w-4xl">
+      {recentTalks.map((t) => <TalkRow talk={t} />)}
+    </div>
+    <div class="mt-8">
+      <a
+        href="/talks/"
+        class="inline-flex items-center gap-1.5 text-sm font-medium text-accent hover:opacity-80"
+      >
+        All talks <Icon name="lucide:arrow-right" class="h-4 w-4" />
+      </a>
+    </div>
+  </Section>
+
+  <Section label="Collaborators" title="Affiliations & collaborations" bordered>
+    <CollaboratorLogos />
+  </Section>
+</BaseLayout>

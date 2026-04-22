@@ -1,0 +1,21 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import Section from '~/components/Section.astro';
+import ProjectCard from '~/components/ProjectCard.astro';
+import { sortByDateDesc } from '~/lib/format';
+
+const projects = sortByDateDesc(await getCollection('projects'));
+---
+
+<BaseLayout title="Projects" description="Research projects by Zhaoxiang (Simon) Cai — code, datasets, and artefacts.">
+  <Section
+    label="Projects"
+    title="Projects"
+    description="Code, datasets, and research artefacts — from federated learning frameworks to proteomic resources used by thousands of researchers."
+  >
+    <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      {projects.map((p) => <ProjectCard project={p} />)}
+    </div>
+  </Section>
+</BaseLayout>

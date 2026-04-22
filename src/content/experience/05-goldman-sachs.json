@@ -1,0 +1,16 @@
+{
+  "title": "Analyst Programmer",
+  "company": "Goldman Sachs",
+  "companyUrl": "https://www.goldmansachs.com/",
+  "logo": "/logos/gs.svg",
+  "location": "Melbourne",
+  "dateStart": "2014-11-10",
+  "dateEnd": "2017-12-31",
+  "current": false,
+  "description": [
+    "Communicated with business stakeholders and liaised regarding project scope with ongoing updates",
+    "Designed/developed/tested/deployed system solutions specialised in Goldman Sachs Electronic Trading (GSET)business flow",
+    "Provided production support and maitained the health of testing environment"
+  ],
+  "order": 4
+}

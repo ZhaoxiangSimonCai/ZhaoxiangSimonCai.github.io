@@ -1,0 +1,133 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import Section from '~/components/Section.astro';
+import CollaboratorLogos from '~/components/CollaboratorLogos.astro';
+import { education, awards, skillGroups } from '~/data/education';
+import { formatMonthYear } from '~/lib/format';
+
+const experience = (await getCollection('experience')).sort((a, b) => a.data.order - b.data.order);
+---
+
+<BaseLayout
+  title="About"
+  description="About Zhaoxiang (Simon) Cai — cancer data scientist, Senior Data Scientist at CMRI, Conjoint Associate Lecturer at University of Sydney."
+>
+  <Section label="About" title="Biography">
+    <div class="prose-lg max-w-prose space-y-5 text-[17px] leading-relaxed">
+      <p>
+        I am a cancer data scientist specialising in artificial intelligence and machine learning for large-scale
+        molecular data analysis. I hold a first-class honours degree in Computer Science from Monash University,
+        where I graduated as the top student, and a PhD in Cancer Data Science from the University of Sydney.
+        After gaining software engineering experience at Goldman Sachs, I transitioned to cancer research and
+        now serve as a Conjoint Associate Lecturer at the University of Sydney and Senior Data Scientist at the
+        Children&rsquo;s Medical Research Institute (CMRI).
+      </p>
+      <p>
+        My research focuses on developing and applying deep learning methods to cancer multi-omics data, with
+        particular expertise in federated learning, generative models, and transformer architectures. As co-first
+        author on the landmark <em>Cancer Cell</em> study mapping the proteomic landscape of 949 human cancer cell
+        lines, I contributed to one of the field&rsquo;s most widely used resources (230+ citations). My subsequent
+        first-author publications in <em>Cancer Discovery</em> and <em>Nature Communications</em> have introduced
+        novel approaches in federated deep learning for privacy-preserving cancer subtyping, and generative AI for
+        synthetic augmentation of multi-omic datasets. I maintain active international collaborations with the
+        Wellcome Sanger Institute (UK) and the University of Lisbon (Portugal).
+      </p>
+      <p>
+        In 2025, I was awarded a Cancer Institute NSW Early Career Fellowship to develop proteomic foundation models
+        integrated with federated learning for multi-hospital cancer research. My work to date has generated over
+        900 citations (h-index: 8) and I have contributed to more than $1.59 million in competitive research funding.
+        I am driven by the goal of translating advanced computational methods into practical tools that improve
+        cancer diagnosis and prognosis through precision medicine.
+      </p>
+    </div>
+  </Section>
+
+  <Section label="Experience" title="Professional appointments" bordered>
+    <ol class="relative max-w-3xl border-l border-border pl-6">
+      {
+        experience.map((e) => (
+          <li class="relative pb-10 last:pb-0">
+            <span class="absolute -left-[33px] top-1.5 grid h-4 w-4 place-items-center rounded-full border border-border bg-bg">
+              <span class={`h-2 w-2 rounded-full ${e.data.current ? 'bg-accent' : 'bg-muted/40'}`} />
+            </span>
+            <div class="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+              <h3 class="font-display text-lg font-semibold text-fg">{e.data.title}</h3>
+              {e.data.companyUrl ? (
+                <a href={e.data.companyUrl} class="link-underline text-muted" rel="noopener noreferrer" target="_blank">
+                  {e.data.company}
+                </a>
+              ) : (
+                <span class="text-muted">{e.data.company}</span>
+              )}
+              {e.data.location && <span class="text-xs text-muted/70">· {e.data.location}</span>}
+            </div>
+            <div class="mt-1 font-mono text-xs uppercase tracking-wide text-muted">
+              {formatMonthYear(e.data.dateStart)} — {e.data.current ? 'Present' : formatMonthYear(e.data.dateEnd || e.data.dateStart)}
+            </div>
+            {e.data.description.length > 0 && (
+              <ul class="mt-3 list-disc space-y-1.5 pl-4 text-sm leading-relaxed text-muted marker:text-accent/60">
+                {e.data.description.map((item) => <li>{item}</li>)}
+              </ul>
+            )}
+          </li>
+        ))
+      }
+    </ol>
+  </Section>
+
+  <Section label="Education" title="Qualifications" bordered>
+    <div class="grid max-w-4xl gap-5 md:grid-cols-1">
+      {
+        education.map((e) => (
+          <div class="surface-card">
+            <div class="font-mono text-xs uppercase tracking-wide text-muted">{e.years}</div>
+            <h3 class="mt-1 font-display text-lg font-semibold">{e.degree}</h3>
+            <div class="text-sm text-muted">{e.institution}</div>
+            <p class="mt-3 text-sm leading-relaxed text-muted">{e.note}</p>
+          </div>
+        ))
+      }
+    </div>
+  </Section>
+
+  <Section label="Awards & funding" title="Awards and honours" bordered>
+    <ul class="max-w-3xl divide-y divide-border">
+      {
+        awards.map((a) => (
+          <li class="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 py-3">
+            <div class="flex items-baseline gap-3">
+              <span class="font-mono text-xs text-muted">{a.year}</span>
+              <span class="text-fg">{a.title}</span>
+            </div>
+            {a.amount && <span class="text-sm text-muted">{a.amount}</span>}
+          </li>
+        ))
+      }
+    </ul>
+  </Section>
+
+  <Section label="Skills" title="Technical skills" bordered>
+    <div class="grid max-w-4xl gap-6 md:grid-cols-3">
+      {
+        skillGroups.map((g) => (
+          <div>
+            <h3 class="font-display text-base font-semibold">{g.title}</h3>
+            <ul class="mt-3 space-y-1.5 text-sm text-muted">
+              {g.items.map((s) => (
+                <li class="flex items-start gap-2">
+                  <span class="mt-1.5 block h-1 w-1 rounded-full bg-accent/60" />
+                  {s}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+    </div>
+  </Section>
+
+  <Section label="Collaborations" title="Partners & affiliations" bordered>
+    <CollaboratorLogos />
+  </Section>
+</BaseLayout>

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://zhaoxiangsimoncai.github.io/sitemap-index.xml

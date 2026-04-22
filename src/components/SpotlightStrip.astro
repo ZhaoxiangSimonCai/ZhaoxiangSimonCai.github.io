@@ -1,0 +1,46 @@
+---
+import { metrics } from '~/data/metrics';
+
+const items = [
+  {
+    label: `Awarded ${metrics.fellowship.awardedYear}`,
+    value: metrics.fellowship.amount,
+    unit: metrics.fellowship.years,
+    caption: metrics.fellowship.name,
+  },
+  {
+    label: 'Google Scholar',
+    value: metrics.totalCitations.toLocaleString(),
+    unit: 'citations',
+    caption: `h-index ${metrics.hIndex} · i10 ${metrics.i10Index}`,
+  },
+  {
+    label: 'Peer-reviewed',
+    value: `${metrics.peerReviewedPapers}`,
+    unit: 'publications',
+    caption: `${metrics.firstOrCoFirstAuthor} first / co-first author · ${metrics.totalFunding} funding`,
+  },
+];
+---
+
+<section aria-label="Spotlight" class="border-b border-border bg-surface-2/40">
+  <div class="container-page grid gap-0 md:grid-cols-3">
+    {
+      items.map((it, i) => (
+        <div
+          class:list={[
+            'px-0 py-8 md:px-8',
+            i > 0 && 'border-t border-border md:border-l md:border-t-0',
+          ]}
+        >
+          <div class="section-label mb-3">{it.label}</div>
+          <div class="flex items-baseline gap-2">
+            <span class="font-display text-3xl font-semibold text-fg md:text-4xl">{it.value}</span>
+            <span class="text-sm text-muted">{it.unit}</span>
+          </div>
+          <p class="mt-2 text-sm text-muted">{it.caption}</p>
+        </div>
+      ))
+    }
+  </div>
+</section>

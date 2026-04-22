@@ -1,0 +1,53 @@
+---
+import { site } from '~/data/site';
+
+const logos = [
+  { ...site.affiliations[0] },
+  { ...site.affiliations[1] },
+  {
+    name: 'Wellcome Sanger Institute',
+    nameShort: 'Sanger',
+    url: 'https://www.sanger.ac.uk/',
+    logo: undefined,
+  },
+  {
+    name: 'University of Lisbon',
+    nameShort: 'U Lisboa',
+    url: 'https://www.ulisboa.pt/en',
+    logo: undefined,
+  },
+  {
+    name: 'Goldman Sachs (past)',
+    nameShort: 'Goldman Sachs',
+    url: 'https://www.goldmansachs.com/',
+    logo: '/logos/gs.svg',
+  },
+];
+---
+
+<div class="grid grid-cols-2 items-center gap-x-8 gap-y-6 md:grid-cols-5">
+  {
+    logos.map((l) => (
+      <a
+        href={l.url}
+        class="group flex flex-col items-center gap-2 text-center text-muted transition hover:text-fg"
+        rel="noopener noreferrer"
+        target="_blank"
+      >
+        {l.logo ? (
+          <img
+            src={l.logo}
+            alt=""
+            loading="lazy"
+            class="h-10 opacity-70 grayscale transition group-hover:opacity-100 group-hover:grayscale-0 dark:brightness-0 dark:invert"
+          />
+        ) : (
+          <div class="font-display text-xl font-semibold opacity-70 transition group-hover:opacity-100">
+            {l.nameShort}
+          </div>
+        )}
+        <div class="text-[11px] font-medium leading-tight">{l.name}</div>
+      </a>
+    ))
+  }
+</div>

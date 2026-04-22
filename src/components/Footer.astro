@@ -1,0 +1,70 @@
+---
+import { site } from '~/data/site';
+import { Icon } from 'astro-icon/components';
+
+const year = new Date().getFullYear();
+
+const socials = [
+  { href: site.socials.email, label: 'Email', icon: 'lucide:mail' },
+  { href: site.socials.scholar, label: 'Google Scholar', icon: 'simple-icons:googlescholar' },
+  { href: site.socials.github, label: 'GitHub', icon: 'simple-icons:github' },
+  { href: site.socials.linkedin, label: 'LinkedIn', icon: 'simple-icons:linkedin' },
+  { href: site.socials.twitter, label: 'X / Twitter', icon: 'simple-icons:x' },
+];
+---
+
+<footer class="mt-24 border-t border-border bg-surface-2/40">
+  <div class="container-page py-12">
+    <div class="flex flex-col gap-8 md:flex-row md:items-start md:justify-between">
+      <div class="max-w-md">
+        <div class="font-display text-xl font-semibold tracking-tight">{site.nameShort}</div>
+        <p class="mt-2 text-sm text-muted">{site.role}</p>
+        <p class="mt-4 text-sm leading-relaxed text-muted">
+          {site.tagline}
+        </p>
+      </div>
+
+      <div class="flex flex-col gap-4">
+        <div class="flex flex-wrap gap-2">
+          {
+            socials.map((s) => (
+              <a
+                href={s.href}
+                aria-label={s.label}
+                class="grid h-10 w-10 place-items-center rounded-md border border-border bg-surface text-muted transition hover:border-accent hover:text-accent"
+                rel={s.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                target={s.href.startsWith('http') ? '_blank' : undefined}
+              >
+                <Icon name={s.icon} class="h-4 w-4" />
+              </a>
+            ))
+          }
+        </div>
+        <a
+          href={site.cv.path}
+          class="inline-flex items-center gap-2 self-start rounded-md border border-border bg-surface px-4 py-2 text-sm font-medium transition hover:border-accent hover:text-accent"
+          download
+        >
+          <Icon name="lucide:download" class="h-4 w-4" />
+          {site.cv.label}
+        </a>
+      </div>
+    </div>
+
+    <div
+      class="mt-10 flex flex-col gap-3 border-t border-border pt-6 text-xs text-muted md:flex-row md:items-center md:justify-between"
+    >
+      <div>
+        © {year} Zhaoxiang Cai. Built with Astro. <a
+          href="https://github.com/ZhaoxiangSimonCai/ZhaoxiangSimonCai.github.io"
+          class="hover:text-fg"
+          rel="noopener noreferrer"
+          target="_blank">Source</a
+        >.
+      </div>
+      <div class="font-mono">
+        <a href={site.socials.email} class="hover:text-fg">{site.email}</a>
+      </div>
+    </div>
+  </div>
+</footer>

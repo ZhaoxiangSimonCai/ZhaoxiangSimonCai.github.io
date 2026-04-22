@@ -1,0 +1,56 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { Icon } from 'astro-icon/components';
+import { Image } from 'astro:assets';
+
+export interface Props {
+  project: CollectionEntry<'projects'>;
+}
+
+const { project } = Astro.props;
+const d = project.data;
+const href = `/projects/${project.slug}/`;
+---
+
+<article class="group relative flex flex-col overflow-hidden rounded-lg border border-border bg-surface transition hover:border-accent/60 hover:shadow-[0_2px_0_rgb(var(--accent))]">
+  <a href={href} class="relative aspect-[16/9] overflow-hidden bg-surface-2">
+    {d.image ? (
+      <Image
+        src={d.image}
+        alt={d.imageAlt || d.title}
+        width={640}
+        height={360}
+        class="h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]"
+        loading="lazy"
+      />
+    ) : (
+      <div class="flex h-full w-full items-center justify-center bg-gradient-to-br from-accent/10 via-surface-2 to-accent-2/10 p-6">
+        <div class="font-display text-2xl font-semibold text-muted/60 group-hover:text-accent">
+          {d.tags.slice(0, 2).join(' · ') || d.title}
+        </div>
+      </div>
+    )}
+  </a>
+  <div class="flex flex-1 flex-col gap-3 p-5">
+    <h3 class="font-display text-lg font-semibold leading-snug">
+      <a href={href} class="link-underline">{d.title}</a>
+    </h3>
+    <p class="line-clamp-3 text-sm leading-relaxed text-muted">{d.summary}</p>
+    <div class="mt-auto flex flex-wrap items-center gap-2 pt-2">
+      {d.tags.slice(0, 3).map((t) => <span class="chip">{t}</span>)}
+      <div class="ml-auto flex gap-1.5">
+        {d.github && (
+          <a
+            href={d.github}
+            class="grid h-7 w-7 place-items-center rounded text-muted transition hover:bg-surface-2 hover:text-accent"
+            aria-label="GitHub"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            <Icon name="simple-icons:github" class="h-3.5 w-3.5" />
+          </a>
+        )}
+      </div>
+    </div>
+  </div>
+</article>
