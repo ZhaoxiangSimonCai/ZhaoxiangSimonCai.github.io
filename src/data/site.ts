@@ -7,7 +7,7 @@ export const site = {
     'Deep learning for cancer multi-omics. Federated learning, generative models, foundation models for proteomics.',
   url: 'https://zhaoxiangsimoncai.github.io',
   description:
-    'Personal site of Dr Zhaoxiang (Simon) Cai — Senior Data Scientist at Children\u2019s Medical Research Institute and Conjoint Associate Lecturer at the University of Sydney. Cancer multi-omics, deep learning, federated learning, generative AI.',
+    'Personal site of Dr Zhaoxiang (Simon) Cai — Senior Data Scientist at Children\u2019s Medical Research Institute and Adjunct Lecturer at the University of Sydney. Cancer multi-omics, deep learning, federated learning, generative AI.',
   email: 'zhaoxiang.cai@hotmail.com',
   nav: [
     { href: '/research/', label: 'Research' },
