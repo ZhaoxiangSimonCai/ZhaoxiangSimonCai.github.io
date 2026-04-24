@@ -12,7 +12,6 @@ export const site = {
   nav: [
     { href: '/research/', label: 'Research' },
     { href: '/projects/', label: 'Projects' },
-    { href: '/talks/', label: 'Talks' },
     { href: '/about/', label: 'About' },
     { href: '/cv/', label: 'CV' },
   ],

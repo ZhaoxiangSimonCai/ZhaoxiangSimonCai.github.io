@@ -50,19 +50,6 @@ const projects = defineCollection({
     }),
 });
 
-const talks = defineCollection({
-  type: 'content',
-  schema: z.object({
-    title: z.string(),
-    event: z.string(),
-    location: z.string().optional(),
-    date: z.coerce.date(),
-    type: z.enum(['invited', 'oral', 'poster', 'seminar', 'media']).default('oral'),
-    url: z.string().optional(),
-    summary: z.string().optional(),
-  }),
-});
-
 const experience = defineCollection({
   type: 'data',
   schema: z.object({
@@ -80,4 +67,4 @@ const experience = defineCollection({
   }),
 });
 
-export const collections = { publications, projects, talks, experience };
+export const collections = { publications, projects, experience };

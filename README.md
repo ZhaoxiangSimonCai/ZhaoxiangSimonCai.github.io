@@ -71,22 +71,6 @@ paper: "https://doi.org/…"
 ---
 ```
 
-### Add a talk
-
-Create `src/content/talks/<slug>/index.mdx`. Required frontmatter:
-
-```yaml
----
-title: "Talk title"
-event: "Conference name"
-location: "Sydney, Australia"
-date: "2026-06-01"
-type: "invited"                   # invited | oral | poster | seminar | media
-url: "https://…"                  # optional
-summary: "Optional description."
----
-```
-
 ### Update Experience
 
 `src/content/experience/NN-slug.json` — ordered JSON files.

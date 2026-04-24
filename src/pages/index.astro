@@ -6,20 +6,17 @@ import SpotlightStrip from '~/components/SpotlightStrip.astro';
 import Section from '~/components/Section.astro';
 import PublicationCard from '~/components/PublicationCard.astro';
 import ProjectCard from '~/components/ProjectCard.astro';
-import TalkRow from '~/components/TalkRow.astro';
 import CollaboratorLogos from '~/components/CollaboratorLogos.astro';
 import { sortByDateDesc } from '~/lib/format';
 import { Icon } from 'astro-icon/components';
 
-const [allPubs, allProjects, allTalks] = await Promise.all([
+const [allPubs, allProjects] = await Promise.all([
   getCollection('publications'),
   getCollection('projects'),
-  getCollection('talks'),
 ]);
 
 const featuredPubs = sortByDateDesc(allPubs.filter((p) => p.data.featured)).slice(0, 4);
 const featuredProjects = sortByDateDesc(allProjects.filter((p) => p.data.featured)).slice(0, 6);
-const recentTalks = sortByDateDesc(allTalks).slice(0, 4);
 
 const themes = [
   {
@@ -124,20 +121,6 @@ const themes = [
       </div>
     </Section>
   )}
-
-  <Section label="Talks" title="Recent presentations" bordered>
-    <div class="max-w-4xl">
-      {recentTalks.map((t) => <TalkRow talk={t} />)}
-    </div>
-    <div class="mt-8">
-      <a
-        href="/talks/"
-        class="inline-flex items-center gap-1.5 text-sm font-medium text-accent hover:opacity-80"
-      >
-        All talks <Icon name="lucide:arrow-right" class="h-4 w-4" />
-      </a>
-    </div>
-  </Section>
 
   <Section label="Collaborators" title="Affiliations & collaborations" bordered>
     <CollaboratorLogos />
