@@ -10,7 +10,7 @@ const tr = t('zh');
 const projects = sortByDateDesc(await getCollection('projects'));
 ---
 
-<BaseLayout title={tr.projects.title} description="蔡兆翔（Simon）的研究项目 —— 代码、数据集与研究成果。">
+<BaseLayout title={tr.projects.title} description="蔡兆祥（Simon）的研究项目 —— 代码、数据集与研究产出。">
   <Section label={tr.projects.label} title={tr.projects.title} description={tr.projects.description}>
     <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
       {projects.map((p) => <ProjectCard project={p} />)}

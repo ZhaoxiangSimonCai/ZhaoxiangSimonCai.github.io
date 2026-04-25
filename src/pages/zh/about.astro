@@ -36,7 +36,7 @@ function localiseExperience(slug: string, descriptionEn: string[]): string[] {
 }
 ---
 
-<BaseLayout title={tr.about.title} description="关于蔡兆翔（Simon）—— 癌症数据科学家、CMRI 高级数据科学家、悉尼大学兼职讲师。">
+<BaseLayout title={tr.about.title} description="关于蔡兆祥（Simon）—— 癌症数据科学家、CMRI 高级数据科学家、悉尼大学医学与健康学院兼任讲师（Adjunct Lecturer）。">
   <Section label={tr.about.label} title={tr.about.title}>
     <div class="prose-lg max-w-prose space-y-5 text-[17px] leading-relaxed">
       {tr.about.bio.map((p) => <p set:html={p.replace(/\*([^*]+)\*/g, '<em>$1</em>')} />)}
