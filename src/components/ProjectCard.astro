@@ -2,6 +2,7 @@
 import type { CollectionEntry } from 'astro:content';
 import { Icon } from 'astro-icon/components';
 import { Image } from 'astro:assets';
+import { getLang, withLocale } from '~/i18n';
 
 export interface Props {
   project: CollectionEntry<'projects'>;
@@ -9,7 +10,8 @@ export interface Props {
 
 const { project } = Astro.props;
 const d = project.data;
-const href = `/projects/${project.slug}/`;
+const lang = getLang(Astro.url.pathname);
+const href = withLocale(`/projects/${project.slug}/`, lang);
 ---
 
 <article class="group relative flex flex-col overflow-hidden rounded-lg border border-border bg-surface transition hover:border-accent/60 hover:shadow-[0_2px_0_rgb(var(--accent))]">

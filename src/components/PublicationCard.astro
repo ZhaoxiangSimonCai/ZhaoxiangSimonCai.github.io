@@ -1,7 +1,8 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 import { Icon } from 'astro-icon/components';
-import { cleanVenue, doiUrl, authorRole, formatAuthors } from '~/lib/format';
+import { cleanVenue, doiUrl, formatAuthors } from '~/lib/format';
+import { getLang, withLocale, t } from '~/i18n';
 
 export interface Props {
   pub: CollectionEntry<'publications'>;
@@ -10,9 +11,15 @@ export interface Props {
 
 const { pub, compact = false } = Astro.props;
 const d = pub.data;
+const lang = getLang(Astro.url.pathname);
+const tr = t(lang);
 const venue = cleanVenue(d.venue);
-const href = `/research/${pub.slug}/`;
-const role = authorRole(d);
+const href = withLocale(`/research/${pub.slug}/`, lang);
+const role = d.coFirstAuthor
+  ? tr.research.coFirstAuthor
+  : d.firstAuthor
+    ? tr.research.firstAuthor
+    : d.role;
 const authorsHtml = formatAuthors(d.authors);
 ---
 
@@ -66,7 +73,7 @@ const authorsHtml = formatAuthors(d.authors);
         aria-label={`DOI ${d.doi}`}
       >
         <Icon name="lucide:link-2" class="h-3 w-3" />
-        DOI
+        {tr.research.doi}
       </a>
     )}
     {d.pdf && (
@@ -77,7 +84,7 @@ const authorsHtml = formatAuthors(d.authors);
         target="_blank"
       >
         <Icon name="lucide:file-text" class="h-3 w-3" />
-        PDF
+        {tr.research.pdf}
       </a>
     )}
     {d.code && (
@@ -88,7 +95,7 @@ const authorsHtml = formatAuthors(d.authors);
         target="_blank"
       >
         <Icon name="simple-icons:github" class="h-3 w-3" />
-        Code
+        {tr.research.code}
       </a>
     )}
     {d.tags?.slice(0, 3).map((t) => (

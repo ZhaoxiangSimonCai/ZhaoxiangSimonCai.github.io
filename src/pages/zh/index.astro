@@ -1,0 +1,100 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import Hero from '~/components/Hero.astro';
+import SpotlightStrip from '~/components/SpotlightStrip.astro';
+import Section from '~/components/Section.astro';
+import PublicationCard from '~/components/PublicationCard.astro';
+import ProjectCard from '~/components/ProjectCard.astro';
+import CollaboratorLogos from '~/components/CollaboratorLogos.astro';
+import { sortByDateDesc } from '~/lib/format';
+import { Icon } from 'astro-icon/components';
+import { t } from '~/i18n';
+
+const tr = t('zh');
+
+const [allPubs, allProjects] = await Promise.all([
+  getCollection('publications'),
+  getCollection('projects'),
+]);
+
+const featuredPubs = sortByDateDesc(allPubs.filter((p) => p.data.featured)).slice(0, 4);
+const featuredProjects = sortByDateDesc(allProjects.filter((p) => p.data.featured)).slice(0, 6);
+---
+
+<BaseLayout>
+  <Hero />
+  <SpotlightStrip />
+
+  <Section
+    label={tr.home.themesLabel}
+    title={tr.home.themesTitle}
+    description={tr.home.themesDescription}
+  >
+    <div class="grid gap-4 md:grid-cols-2">
+      {
+        tr.home.themes.map((th) => (
+          <a
+            href={`/zh/research/?tag=${encodeURIComponent(th.tag)}`}
+            class="group flex flex-col gap-3 rounded-lg border border-border bg-surface p-6 transition hover:border-accent/60 hover:shadow-[0_2px_0_rgb(var(--accent))]"
+          >
+            <div class="flex items-center gap-3">
+              <span class="grid h-9 w-9 place-items-center rounded-md bg-accent/10 text-accent">
+                <Icon name={th.icon} class="h-4 w-4" />
+              </span>
+              <h3 class="font-display text-lg font-semibold">{th.title}</h3>
+            </div>
+            <p class="text-sm leading-relaxed text-muted">{th.description}</p>
+            <span class="mt-auto inline-flex items-center gap-1 text-xs font-medium text-accent opacity-0 transition group-hover:opacity-100">
+              查看相关论文 <Icon name="lucide:arrow-right" class="h-3.5 w-3.5" />
+            </span>
+          </a>
+        ))
+      }
+    </div>
+  </Section>
+
+  <Section
+    label={tr.home.featuredLabel}
+    title={tr.home.featuredTitle}
+    description={tr.home.featuredDescription}
+    bordered
+  >
+    <div class="grid gap-4 md:grid-cols-2">
+      {featuredPubs.map((p) => <PublicationCard pub={p} />)}
+    </div>
+    <div class="mt-8">
+      <a
+        href="/zh/research/"
+        class="inline-flex items-center gap-1.5 text-sm font-medium text-accent hover:opacity-80"
+      >
+        {tr.home.featuredAll} <Icon name="lucide:arrow-right" class="h-4 w-4" />
+      </a>
+    </div>
+  </Section>
+
+  {featuredProjects.length > 0 && (
+    <Section
+      label={tr.home.projectsLabel}
+      title={tr.home.projectsTitle}
+      description={tr.home.projectsDescription}
+      bordered
+    >
+      <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {featuredProjects.map((p) => <ProjectCard project={p} />)}
+      </div>
+      <div class="mt-8">
+        <a
+          href="/zh/projects/"
+          class="inline-flex items-center gap-1.5 text-sm font-medium text-accent hover:opacity-80"
+        >
+          {tr.home.projectsAll} <Icon name="lucide:arrow-right" class="h-4 w-4" />
+        </a>
+      </div>
+    </Section>
+  )}
+
+  <Section label={tr.home.collabsLabel} title={tr.home.collabsTitle} bordered>
+    <CollaboratorLogos />
+  </Section>
+</BaseLayout>

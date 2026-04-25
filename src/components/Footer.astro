@@ -1,11 +1,21 @@
 ---
 import { site } from '~/data/site';
 import { Icon } from 'astro-icon/components';
+import { getLang, withLocale, t } from '~/i18n';
 
+const lang = getLang(Astro.url.pathname);
+const tr = t(lang);
 const year = new Date().getFullYear();
 
+const tagline =
+  lang === 'zh'
+    ? '癌症多组学的深度学习。联邦学习、生成式模型、蛋白质组基础模型。'
+    : site.tagline;
+
+const cvLabel = lang === 'zh' ? '下载简历(PDF)' : site.cv.label;
+
 const socials = [
-  { href: site.socials.email, label: 'Email', icon: 'lucide:mail' },
+  { href: site.socials.email, label: lang === 'zh' ? '邮件' : 'Email', icon: 'lucide:mail' },
   { href: site.socials.scholar, label: 'Google Scholar', icon: 'simple-icons:googlescholar' },
   { href: site.socials.github, label: 'GitHub', icon: 'simple-icons:github' },
   { href: site.socials.linkedin, label: 'LinkedIn', icon: 'simple-icons:linkedin' },
@@ -17,10 +27,10 @@ const socials = [
   <div class="container-page py-12">
     <div class="flex flex-col gap-8 md:flex-row md:items-start md:justify-between">
       <div class="max-w-md">
-        <div class="font-display text-xl font-semibold tracking-tight">{site.nameShort}</div>
-        <p class="mt-2 text-sm text-muted">{site.role}</p>
+        <div class="font-display text-xl font-semibold tracking-tight">{tr.siteName}</div>
+        <p class="mt-2 text-sm text-muted">{tr.role}</p>
         <p class="mt-4 text-sm leading-relaxed text-muted">
-          {site.tagline}
+          {tagline}
         </p>
       </div>
 
@@ -46,7 +56,7 @@ const socials = [
           download
         >
           <Icon name="lucide:download" class="h-4 w-4" />
-          {site.cv.label}
+          {cvLabel}
         </a>
       </div>
     </div>
@@ -55,11 +65,11 @@ const socials = [
       class="mt-10 flex flex-col gap-3 border-t border-border pt-6 text-xs text-muted md:flex-row md:items-center md:justify-between"
     >
       <div>
-        © {year} Zhaoxiang Cai. Built with Astro. <a
+        {tr.common.copyright.replace('{year}', String(year))} {tr.common.builtWith} <a
           href="https://github.com/ZhaoxiangSimonCai/ZhaoxiangSimonCai.github.io"
           class="hover:text-fg"
           rel="noopener noreferrer"
-          target="_blank">Source</a
+          target="_blank">{tr.common.source}</a
         >.
       </div>
       <div class="font-mono">

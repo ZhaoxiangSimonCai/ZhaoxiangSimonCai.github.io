@@ -1,7 +1,10 @@
 ---
 import { site } from '~/data/site';
+import { getLang } from '~/i18n';
 
-const logos = [
+const lang = getLang(Astro.url.pathname);
+
+const logosEn = [
   { ...site.affiliations[0] },
   { ...site.affiliations[1] },
   {
@@ -23,6 +26,16 @@ const logos = [
     logo: '/logos/gs.svg',
   },
 ];
+
+const logosZh = [
+  { name: "儿童医学研究所(CMRI)", nameShort: 'CMRI', url: site.affiliations[0].url, logo: '/logos/cmri.svg' },
+  { name: '悉尼大学', nameShort: '悉尼大学', url: site.affiliations[1].url, logo: '/logos/usyd.svg' },
+  { name: 'Wellcome Sanger Institute(英国)', nameShort: 'Sanger', url: 'https://www.sanger.ac.uk/', logo: undefined },
+  { name: '里斯本大学(葡萄牙)', nameShort: 'U Lisboa', url: 'https://www.ulisboa.pt/en', logo: undefined },
+  { name: '高盛(Goldman Sachs,曾就职)', nameShort: 'Goldman Sachs', url: 'https://www.goldmansachs.com/', logo: '/logos/gs.svg' },
+];
+
+const logos = lang === 'zh' ? logosZh : logosEn;
 ---
 
 <div class="grid grid-cols-2 items-center gap-x-8 gap-y-6 md:grid-cols-5">

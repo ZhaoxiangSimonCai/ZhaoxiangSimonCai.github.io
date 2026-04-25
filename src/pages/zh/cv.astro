@@ -1,0 +1,52 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import Section from '~/components/Section.astro';
+import { Icon } from 'astro-icon/components';
+import { site } from '~/data/site';
+import { t } from '~/i18n';
+
+const tr = t('zh');
+---
+
+<BaseLayout
+  title={tr.cv.title}
+  description="蔡兆翔（Simon）的完整简历(英文版)。"
+>
+  <Section
+    label={tr.cv.label}
+    title={tr.cv.title}
+    description={tr.cv.description(site.cv.lastUpdated)}
+  >
+    <div class="mb-6 flex flex-wrap items-center gap-3">
+      <a
+        href={site.cv.path}
+        download
+        class="inline-flex items-center gap-2 rounded-md bg-accent px-4 py-2 text-sm font-medium text-white transition hover:bg-accent/90"
+      >
+        <Icon name="lucide:download" class="h-4 w-4" /> {tr.common.downloadPdf}
+      </a>
+      <a
+        href={site.cv.path}
+        rel="noopener noreferrer"
+        target="_blank"
+        class="inline-flex items-center gap-2 rounded-md border border-border bg-surface px-4 py-2 text-sm font-medium transition hover:border-accent hover:text-accent"
+      >
+        <Icon name="lucide:external-link" class="h-4 w-4" /> {tr.common.openInNewTab}
+      </a>
+    </div>
+
+    <div class="aspect-[8.5/11] w-full overflow-hidden rounded-lg border border-border bg-surface-2">
+      <iframe
+        src={`${site.cv.path}#view=FitH`}
+        title={tr.cv.iframeTitle}
+        class="h-full w-full"
+        loading="lazy"
+      ></iframe>
+    </div>
+
+    <p class="mt-6 text-sm text-muted">
+      {tr.cv.iframeFallback}
+      <a href={site.cv.path} class="link-underline text-accent-2" download>{tr.cv.downloadIt}</a>。
+    </p>
+  </Section>
+</BaseLayout>

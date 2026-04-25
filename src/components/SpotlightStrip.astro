@@ -1,24 +1,35 @@
 ---
 import { metrics } from '~/data/metrics';
+import { getLang, t } from '~/i18n';
+
+const lang = getLang(Astro.url.pathname);
+const tr = t(lang);
+
+const fellowshipName = lang === 'zh'
+  ? 'Cancer Institute NSW Early Career Fellowship'
+  : metrics.fellowship.name;
+const peerReviewedCaption = lang === 'zh'
+  ? `${metrics.firstOrCoFirstAuthor} 篇为${tr.spotlight.firstCoFirst} · ${metrics.totalFunding} 研究经费`
+  : `${metrics.firstOrCoFirstAuthor} ${tr.spotlight.firstCoFirst} · ${metrics.totalFunding} ${tr.spotlight.funding}`;
 
 const items = [
   {
-    label: `Awarded ${metrics.fellowship.awardedYear}`,
+    label: `${tr.spotlight.awarded} ${metrics.fellowship.awardedYear}`,
     value: metrics.fellowship.amount,
     unit: metrics.fellowship.years,
-    caption: metrics.fellowship.name,
+    caption: fellowshipName,
   },
   {
-    label: 'Google Scholar',
+    label: tr.spotlight.scholar,
     value: metrics.totalCitations.toLocaleString(),
-    unit: 'citations',
-    caption: `h-index ${metrics.hIndex} · i10 ${metrics.i10Index}`,
+    unit: tr.spotlight.citations,
+    caption: `${tr.spotlight.hIndex} ${metrics.hIndex} · ${tr.spotlight.i10} ${metrics.i10Index}`,
   },
   {
-    label: 'Peer-reviewed',
+    label: tr.spotlight.peerReviewed,
     value: `${metrics.peerReviewedPapers}`,
-    unit: 'publications',
-    caption: `${metrics.firstOrCoFirstAuthor} first / co-first author · ${metrics.totalFunding} funding`,
+    unit: tr.spotlight.publications,
+    caption: peerReviewedCaption,
   },
 ];
 ---

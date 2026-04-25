@@ -1,0 +1,157 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import Section from '~/components/Section.astro';
+import CollaboratorLogos from '~/components/CollaboratorLogos.astro';
+import { formatMonthYear } from '~/lib/format';
+import {
+  t,
+  educationZh,
+  awardsZh,
+  serviceItemsZh,
+  skillGroupsZh,
+  expRoleZh,
+  expCompanyZh,
+  expDescZh,
+} from '~/i18n';
+
+const tr = t('zh');
+
+const experience = (await getCollection('experience')).sort((a, b) => a.data.order - b.data.order);
+
+// Map experience entries to a Chinese-friendly bullet set.
+function localiseExperience(slug: string, descriptionEn: string[]): string[] {
+  // file slugs from src/content/experience are like "01-children-s-medical-research-institute"
+  const key = (() => {
+    if (slug.endsWith('children-s-medical-research-institute') && slug.startsWith('01')) return 'cmri-sds';
+    if (slug.endsWith('university-of-sydney') && slug.startsWith('02')) return 'usyd-adjunct';
+    if (slug.includes('university-of-sydney-conjoint')) return 'usyd-conjoint';
+    if (slug.endsWith('university-of-sydney-cmri')) return 'usyd-phd';
+    if (slug.endsWith('children-s-medical-research-institute') && slug.startsWith('04')) return 'cmri-ds';
+    if (slug.endsWith('goldman-sachs')) return 'gs-analyst';
+    return null;
+  })();
+  if (key && expDescZh[key]) return expDescZh[key];
+  return descriptionEn;
+}
+---
+
+<BaseLayout title={tr.about.title} description="关于蔡兆翔（Simon）—— 癌症数据科学家、CMRI 高级数据科学家、悉尼大学兼职讲师。">
+  <Section label={tr.about.label} title={tr.about.title}>
+    <div class="prose-lg max-w-prose space-y-5 text-[17px] leading-relaxed">
+      {tr.about.bio.map((p) => <p set:html={p.replace(/\*([^*]+)\*/g, '<em>$1</em>')} />)}
+    </div>
+  </Section>
+
+  <Section label={tr.about.experienceLabel} title={tr.about.experienceTitle} bordered>
+    <ol class="relative max-w-3xl border-l border-border pl-6">
+      {
+        experience.map((e) => {
+          const titleZh = expRoleZh[e.data.title] ?? e.data.title;
+          const companyZh = expCompanyZh[e.data.company] ?? e.data.company;
+          const descs = localiseExperience(e.id.replace(/\.json$/, ''), e.data.description);
+          return (
+            <li class="relative pb-10 last:pb-0">
+              <span class="absolute -left-[33px] top-1.5 grid h-4 w-4 place-items-center rounded-full border border-border bg-bg">
+                <span class={`h-2 w-2 rounded-full ${e.data.current ? 'bg-accent' : 'bg-muted/40'}`} />
+              </span>
+              <div class="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                <h3 class="font-display text-lg font-semibold text-fg">{titleZh}</h3>
+                {e.data.companyUrl ? (
+                  <a href={e.data.companyUrl} class="link-underline text-muted" rel="noopener noreferrer" target="_blank">
+                    {companyZh}
+                  </a>
+                ) : (
+                  <span class="text-muted">{companyZh}</span>
+                )}
+                {e.data.location && <span class="text-xs text-muted/70">· {e.data.location}</span>}
+              </div>
+              <div class="mt-1 font-mono text-xs uppercase tracking-wide text-muted">
+                {formatMonthYear(e.data.dateStart)} — {e.data.current ? tr.common.present : formatMonthYear(e.data.dateEnd || e.data.dateStart)}
+              </div>
+              {descs.length > 0 && (
+                <ul class="mt-3 list-disc space-y-1.5 pl-4 text-sm leading-relaxed text-muted marker:text-accent/60">
+                  {descs.map((item) => <li>{item}</li>)}
+                </ul>
+              )}
+            </li>
+          );
+        })
+      }
+    </ol>
+  </Section>
+
+  <Section label={tr.about.educationLabel} title={tr.about.educationTitle} bordered>
+    <div class="grid max-w-4xl gap-5 md:grid-cols-1">
+      {
+        educationZh.map((e) => (
+          <div class="surface-card">
+            <div class="font-mono text-xs uppercase tracking-wide text-muted">{e.years}</div>
+            <h3 class="mt-1 font-display text-lg font-semibold">{e.degree}</h3>
+            <div class="text-sm text-muted">{e.institution}</div>
+            <p class="mt-3 text-sm leading-relaxed text-muted">{e.note}</p>
+          </div>
+        ))
+      }
+    </div>
+  </Section>
+
+  <Section label={tr.about.awardsLabel} title={tr.about.awardsTitle} bordered>
+    <ul class="max-w-3xl divide-y divide-border">
+      {
+        awardsZh.map((a) => (
+          <li class="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 py-3">
+            <div class="flex items-baseline gap-3">
+              <span class="font-mono text-xs text-muted">{a.year}</span>
+              <span class="text-fg">{a.title}</span>
+            </div>
+            {a.amount && <span class="text-sm text-muted">{a.amount}</span>}
+          </li>
+        ))
+      }
+    </ul>
+  </Section>
+
+  <Section
+    label={tr.about.serviceLabel}
+    title={tr.about.serviceTitle}
+    description={tr.about.serviceDescription}
+    bordered
+  >
+    <div class="grid max-w-4xl gap-4 md:grid-cols-2">
+      {
+        serviceItemsZh.map((s) => (
+          <div class="surface-card">
+            <span class="section-label mb-2">{s.category}</span>
+            <h3 class="font-display text-base font-semibold text-fg">{s.title}</h3>
+            <p class="mt-2 text-sm leading-relaxed text-muted">{s.detail}</p>
+          </div>
+        ))
+      }
+    </div>
+  </Section>
+
+  <Section label={tr.about.skillsLabel} title={tr.about.skillsTitle} bordered>
+    <div class="grid max-w-4xl gap-6 md:grid-cols-3">
+      {
+        skillGroupsZh.map((g) => (
+          <div>
+            <h3 class="font-display text-base font-semibold">{g.title}</h3>
+            <ul class="mt-3 space-y-1.5 text-sm text-muted">
+              {g.items.map((s) => (
+                <li class="flex items-start gap-2">
+                  <span class="mt-1.5 block h-1 w-1 rounded-full bg-accent/60" />
+                  {s}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+    </div>
+  </Section>
+
+  <Section label={tr.about.collabsLabel} title={tr.about.collabsTitle} bordered>
+    <CollaboratorLogos />
+  </Section>
+</BaseLayout>

@@ -15,8 +15,24 @@ export default {
         'accent-2': 'rgb(var(--accent-2) / <alpha-value>)',
       },
       fontFamily: {
-        display: ['"Fraunces Variable"', 'Georgia', 'serif'],
-        sans: ['"Inter Variable"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        display: [
+          '"Fraunces Variable"',
+          'Georgia',
+          '"Source Han Serif SC"',
+          '"Songti SC"',
+          '"SimSun"',
+          'serif',
+        ],
+        sans: [
+          '"Inter Variable"',
+          'ui-sans-serif',
+          'system-ui',
+          '"PingFang SC"',
+          '"Hiragino Sans GB"',
+          '"Microsoft YaHei"',
+          '"Source Han Sans SC"',
+          'sans-serif',
+        ],
         mono: ['"JetBrains Mono"', 'ui-monospace', 'monospace'],
       },
       maxWidth: {

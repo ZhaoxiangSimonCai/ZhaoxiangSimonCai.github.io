@@ -1,10 +1,24 @@
 ---
 import { site } from '~/data/site';
 import ThemeToggle from '~/components/ThemeToggle.astro';
+import LangToggle from '~/components/LangToggle.astro';
+import { getLang, withLocale, t } from '~/i18n';
 
 const pathname = Astro.url.pathname;
+const lang = getLang(pathname);
+const tr = t(lang);
+const home = withLocale('/', lang);
+
+const navItems = [
+  { href: withLocale('/research/', lang), label: tr.nav.research },
+  { href: withLocale('/projects/', lang), label: tr.nav.projects },
+  { href: withLocale('/teaching/', lang), label: tr.nav.teaching },
+  { href: withLocale('/about/', lang), label: tr.nav.about },
+  { href: withLocale('/cv/', lang), label: tr.nav.cv },
+];
+
 const isActive = (href: string) => {
-  if (href === '/') return pathname === '/';
+  if (href === home) return pathname === home;
   return pathname.startsWith(href);
 };
 ---
@@ -12,22 +26,22 @@ const isActive = (href: string) => {
 <header class="sticky top-0 z-40 border-b border-border bg-bg/85 backdrop-blur">
   <div class="container-page flex h-16 items-center justify-between gap-6">
     <a
-      href="/"
+      href={home}
       class="group flex items-center gap-2.5 font-display text-lg font-semibold tracking-tight"
-      aria-label="Home"
+      aria-label={tr.common.home}
     >
       <span
         class="grid h-8 w-8 place-items-center rounded-full bg-accent font-mono text-xs font-medium text-white transition-transform group-hover:scale-105"
       >
         ZC
       </span>
-      <span class="hidden sm:inline">Zhaoxiang Cai</span>
+      <span class="hidden sm:inline">{tr.siteName}</span>
     </a>
 
     <nav aria-label="Primary" class="flex items-center gap-1">
       <ul class="hidden items-center gap-1 md:flex">
         {
-          site.nav.map((item) => (
+          navItems.map((item) => (
             <li>
               <a
                 href={item.href}
@@ -48,12 +62,13 @@ const isActive = (href: string) => {
       </ul>
 
       <ThemeToggle />
+      <LangToggle />
 
       <button
         id="menu-toggle"
         type="button"
         class="md:hidden rounded-md p-2 text-muted transition hover:bg-surface-2 hover:text-fg"
-        aria-label="Open menu"
+        aria-label={tr.common.openMenu}
         aria-expanded="false"
         aria-controls="mobile-menu"
       >
@@ -78,7 +93,7 @@ const isActive = (href: string) => {
   <div id="mobile-menu" hidden class="border-t border-border md:hidden">
     <ul class="container-page flex flex-col py-2">
       {
-        site.nav.map((item) => (
+        navItems.map((item) => (
           <li>
             <a
               href={item.href}
@@ -97,7 +112,7 @@ const isActive = (href: string) => {
   </div>
 </header>
 
-<script>
+<script define:vars={{ openLabel: tr.common.openMenu, closeLabel: tr.common.closeMenu }}>
   const toggle = document.getElementById('menu-toggle');
   const menu = document.getElementById('mobile-menu');
   toggle?.addEventListener('click', () => {
@@ -105,11 +120,11 @@ const isActive = (href: string) => {
     if (open) {
       menu?.setAttribute('hidden', '');
       toggle?.setAttribute('aria-expanded', 'false');
-      toggle?.setAttribute('aria-label', 'Open menu');
+      toggle?.setAttribute('aria-label', openLabel);
     } else {
       menu?.removeAttribute('hidden');
       toggle?.setAttribute('aria-expanded', 'true');
-      toggle?.setAttribute('aria-label', 'Close menu');
+      toggle?.setAttribute('aria-label', closeLabel);
     }
   });
 </script>

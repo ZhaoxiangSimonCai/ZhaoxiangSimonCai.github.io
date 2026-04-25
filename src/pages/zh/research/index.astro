@@ -1,0 +1,95 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import Section from '~/components/Section.astro';
+import PublicationCard from '~/components/PublicationCard.astro';
+import { sortByDateDesc } from '~/lib/format';
+import { t } from '~/i18n';
+
+const tr = t('zh');
+const pubs = sortByDateDesc(await getCollection('publications'));
+
+const byYear = new Map<number, typeof pubs>();
+for (const p of pubs) {
+  const y = p.data.year;
+  if (!byYear.has(y)) byYear.set(y, []);
+  byYear.get(y)!.push(p);
+}
+const years = [...byYear.keys()].sort((a, b) => b - a);
+
+const allTags = [...new Set(pubs.flatMap((p) => p.data.tags))].sort();
+---
+
+<BaseLayout
+  title={tr.research.title}
+  description="蔡兆翔（Simon）的同行评审论文 —— 涵盖 Cancer Discovery、Nature Communications、Cancer Cell 等期刊。"
+>
+  <Section
+    label={tr.research.label}
+    title={tr.research.title}
+    description={tr.research.description(pubs.length)}
+  >
+    <div class="mb-10 flex flex-wrap items-center gap-2" role="group" aria-label={tr.research.filterAria}>
+      <button data-tag="" class="chip-accent data-[active=true]:bg-accent data-[active=true]:text-white" data-active="true">
+        {tr.research.allCount(pubs.length)}
+      </button>
+      {
+        allTags.map((tag) => (
+          <button data-tag={tag} class="chip data-[active=true]:bg-accent data-[active=true]:text-white data-[active=true]:border-accent">
+            {tag}
+          </button>
+        ))
+      }
+    </div>
+
+    <div class="flex flex-col gap-12">
+      {
+        years.map((year) => (
+          <div data-year={year}>
+            <h2 class="mb-4 font-display text-xl font-semibold text-muted">{year}</h2>
+            <div class="grid gap-4 md:grid-cols-2">
+              {byYear.get(year)!.map((p) => (
+                <div data-pub data-tags={p.data.tags.join('|')}>
+                  <PublicationCard pub={p} />
+                </div>
+              ))}
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </Section>
+</BaseLayout>
+
+<script>
+  const buttons = document.querySelectorAll<HTMLButtonElement>('[data-tag]');
+  const pubs = document.querySelectorAll<HTMLElement>('[data-pub]');
+  const yearGroups = document.querySelectorAll<HTMLElement>('[data-year]');
+
+  const params = new URLSearchParams(location.search);
+  const initial = params.get('tag') ?? '';
+
+  function applyFilter(tag: string) {
+    buttons.forEach((b) => b.setAttribute('data-active', String((b.dataset.tag ?? '') === tag)));
+    pubs.forEach((p) => {
+      const tags = (p.dataset.tags ?? '').split('|');
+      const show = tag === '' || tags.includes(tag);
+      p.style.display = show ? '' : 'none';
+    });
+    yearGroups.forEach((g) => {
+      const anyVisible = g.querySelectorAll<HTMLElement>('[data-pub]').length > 0 && [...g.querySelectorAll<HTMLElement>('[data-pub]')].some(
+        (p) => p.style.display !== 'none'
+      );
+      g.style.display = anyVisible ? '' : 'none';
+    });
+    const url = new URL(location.href);
+    if (tag) url.searchParams.set('tag', tag);
+    else url.searchParams.delete('tag');
+    history.replaceState({}, '', url.toString());
+  }
+
+  buttons.forEach((b) =>
+    b.addEventListener('click', () => applyFilter(b.dataset.tag ?? ''))
+  );
+  applyFilter(initial);
+</script>

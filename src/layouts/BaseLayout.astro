@@ -3,6 +3,7 @@ import '~/styles/global.css';
 import Header from '~/components/Header.astro';
 import Footer from '~/components/Footer.astro';
 import { site } from '~/data/site';
+import { getLang, oppositePath, t } from '~/i18n';
 
 export interface Props {
   title?: string;
@@ -11,20 +12,32 @@ export interface Props {
   noindex?: boolean;
 }
 
+const lang = getLang(Astro.url.pathname);
+const tr = t(lang);
+const altPath = oppositePath(Astro.url.pathname);
+
+const fallbackDescription =
+  lang === 'zh'
+    ? '蔡兆翔(Simon)的个人网站 —— 儿童医学研究所(CMRI)高级数据科学家、悉尼大学兼职讲师。研究方向:癌症多组学、深度学习、联邦学习、生成式 AI。'
+    : site.description;
+
 const {
   title,
-  description = site.description,
+  description = fallbackDescription,
   image = '/og/default.png',
   noindex = false,
 } = Astro.props;
 
-const pageTitle = title ? `${title} — ${site.nameShort}` : `${site.name} — ${site.role}`;
+const pageTitle = title
+  ? `${title} — ${tr.siteName}`
+  : `${tr.siteName} — ${tr.role}`;
 const canonicalUrl = new URL(Astro.url.pathname, Astro.site ?? site.url).toString();
 const ogImage = new URL(image, Astro.site ?? site.url).toString();
+const altLangUrl = new URL(altPath, Astro.site ?? site.url).toString();
 ---
 
 <!doctype html>
-<html lang="en" class="scroll-smooth">
+<html lang={tr.htmlLang} class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -32,6 +45,8 @@ const ogImage = new URL(image, Astro.site ?? site.url).toString();
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="alternate icon" type="image/png" href="/favicon.png" />
     <link rel="canonical" href={canonicalUrl} />
+    <link rel="alternate" hreflang={lang === 'en' ? 'zh-CN' : 'en'} href={altLangUrl} />
+    <link rel="alternate" hreflang="x-default" href={new URL('/', Astro.site ?? site.url).toString()} />
 
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
@@ -42,6 +57,8 @@ const ogImage = new URL(image, Astro.site ?? site.url).toString();
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={ogImage} />
+    <meta property="og:locale" content={lang === 'zh' ? 'zh_CN' : 'en_AU'} />
+    <meta property="og:locale:alternate" content={lang === 'zh' ? 'en_AU' : 'zh_CN'} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={pageTitle} />
     <meta name="twitter:description" content={description} />
@@ -51,7 +68,7 @@ const ogImage = new URL(image, Astro.site ?? site.url).toString();
     <link
       rel="alternate"
       type="application/rss+xml"
-      title={`${site.nameShort} — Publications`}
+      title={`${tr.siteName} — Publications`}
       href="/rss.xml"
     />
 
@@ -71,7 +88,7 @@ const ogImage = new URL(image, Astro.site ?? site.url).toString();
     <a
       href="#main"
       class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded focus:bg-accent focus:px-3 focus:py-2 focus:text-white"
-      >Skip to content</a
+      >{tr.common.skipToContent}</a
     >
     <Header />
     <main id="main" class="flex-1">

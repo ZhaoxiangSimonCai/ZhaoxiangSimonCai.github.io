@@ -1,0 +1,17 @@
+---
+import { oppositePath, getLang } from '~/i18n';
+
+const lang = getLang(Astro.url.pathname);
+const targetPath = oppositePath(Astro.url.pathname);
+const targetLabel = lang === 'en' ? '中' : 'EN';
+const ariaLabel = lang === 'en' ? 'Switch to 中文' : 'Switch to English';
+---
+
+<a
+  href={targetPath}
+  class="grid h-9 min-w-9 place-items-center rounded-md px-2 font-mono text-xs font-medium text-muted transition hover:bg-surface-2 hover:text-fg"
+  aria-label={ariaLabel}
+  hreflang={lang === 'en' ? 'zh-CN' : 'en'}
+>
+  {targetLabel}
+</a>
