@@ -1,4 +1,4 @@
-name: Deploy to GitHub Pages
+name: Deploy site
 
 on:
   push:
@@ -36,3 +36,54 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+  mirror-source:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout (full history)
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Push --mirror to GitCode
+        env:
+          GITCODE_USERNAME: ${{ secrets.GITCODE_USERNAME }}
+          GITCODE_TOKEN: ${{ secrets.GITCODE_TOKEN }}
+        run: |
+          git remote add gitcode \
+            "https://oauth2:${GITCODE_TOKEN}@gitcode.com/${GITCODE_USERNAME}/SimonCaiIntro.git"
+          git push gitcode --mirror
+
+  deploy-gitcode-pages:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Force-push dist/ to GitCode pages branch
+        env:
+          GITCODE_USERNAME: ${{ secrets.GITCODE_USERNAME }}
+          GITCODE_TOKEN: ${{ secrets.GITCODE_TOKEN }}
+        run: |
+          cd dist
+          git init -b pages
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          touch .nojekyll
+          git add -A
+          git commit -m "Build $GITHUB_SHA"
+          git push --force \
+            "https://oauth2:${GITCODE_TOKEN}@gitcode.com/${GITCODE_USERNAME}/SimonCaiIntro.git" \
+            pages
