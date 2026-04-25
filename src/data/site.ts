@@ -8,15 +8,16 @@ export const site = {
   url: 'https://zhaoxiangsimoncai.github.io',
   description:
     'Personal site of Dr Zhaoxiang (Simon) Cai — Senior Data Scientist at Children\u2019s Medical Research Institute and Adjunct Lecturer at the University of Sydney. Cancer multi-omics, deep learning, federated learning, generative AI.',
-  email: 'zhaoxiang.cai@hotmail.com',
+  email: 'zhaoxiang.cai@sydney.edu.au',
   nav: [
     { href: '/research/', label: 'Research' },
     { href: '/projects/', label: 'Projects' },
+    { href: '/teaching/', label: 'Teaching' },
     { href: '/about/', label: 'About' },
     { href: '/cv/', label: 'CV' },
   ],
   socials: {
-    email: 'mailto:zhaoxiang.cai@hotmail.com',
+    email: 'mailto:zhaoxiang.cai@sydney.edu.au',
     scholar: 'https://scholar.google.com/citations?user=J-pGEioAAAAJ&hl=en',
     github: 'https://github.com/ZhaoxiangSimonCai',
     linkedin: 'https://www.linkedin.com/in/zhaoxiang-cai/',
