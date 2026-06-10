@@ -50,6 +50,20 @@ const projects = defineCollection({
     }),
 });
 
+const talks = defineCollection({
+  type: 'content',
+  schema: z.object({
+    title: z.string().optional(), // only when the exact talk title is verified
+    event: z.string(),
+    location: z.string().optional(),
+    date: z.coerce.date(), // sort key; approximate when datePrecision is 'year'
+    datePrecision: z.enum(['year', 'full']).default('year'),
+    type: z.enum(['invited', 'oral', 'poster', 'seminar', 'media']).default('oral'),
+    url: z.string().optional(),
+    summary: z.string().optional(),
+  }),
+});
+
 const experience = defineCollection({
   type: 'data',
   schema: z.object({
@@ -67,4 +81,4 @@ const experience = defineCollection({
   }),
 });
 
-export const collections = { publications, projects, experience };
+export const collections = { publications, projects, talks, experience };

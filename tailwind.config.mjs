@@ -15,22 +15,24 @@ export default {
         'accent-2': 'rgb(var(--accent-2) / <alpha-value>)',
       },
       fontFamily: {
+        // CJK faces sit directly after the primary webfont so Chinese glyphs
+        // resolve to the intended family rather than an ambiguous system font.
         display: [
           '"Fraunces Variable"',
-          'Georgia',
           '"Source Han Serif SC"',
           '"Songti SC"',
           '"SimSun"',
+          'Georgia',
           'serif',
         ],
         sans: [
           '"Inter Variable"',
-          'ui-sans-serif',
-          'system-ui',
           '"PingFang SC"',
           '"Hiragino Sans GB"',
           '"Microsoft YaHei"',
           '"Source Han Sans SC"',
+          'ui-sans-serif',
+          'system-ui',
           'sans-serif',
         ],
         mono: ['"JetBrains Mono"', 'ui-monospace', 'monospace'],

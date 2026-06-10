@@ -28,12 +28,27 @@ const {
   noindex = false,
 } = Astro.props;
 
-const pageTitle = title
-  ? `${title} — ${tr.siteName}`
-  : `${tr.siteName} — ${tr.role}`;
+const pageTitle = title ? `${title} — ${tr.siteName}` : `${tr.siteName} — ${tr.role}`;
 const canonicalUrl = new URL(Astro.url.pathname, Astro.site ?? site.url).toString();
 const ogImage = new URL(image, Astro.site ?? site.url).toString();
 const altLangUrl = new URL(altPath, Astro.site ?? site.url).toString();
+
+const personSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: site.nameShort,
+  alternateName: ['Simon Cai', '蔡兆祥'],
+  jobTitle: site.role,
+  url: site.url,
+  email: site.email,
+  image: new URL('/profile.jpg', Astro.site ?? site.url).toString(),
+  affiliation: site.affiliations.map((a) => ({
+    '@type': 'Organization',
+    name: a.name,
+    url: a.url,
+  })),
+  sameAs: [site.socials.scholar, site.socials.github, site.socials.linkedin],
+};
 ---
 
 <!doctype html>
@@ -46,7 +61,11 @@ const altLangUrl = new URL(altPath, Astro.site ?? site.url).toString();
     <link rel="alternate icon" type="image/png" href="/favicon.png" />
     <link rel="canonical" href={canonicalUrl} />
     <link rel="alternate" hreflang={lang === 'en' ? 'zh-CN' : 'en'} href={altLangUrl} />
-    <link rel="alternate" hreflang="x-default" href={new URL('/', Astro.site ?? site.url).toString()} />
+    <link
+      rel="alternate"
+      hreflang="x-default"
+      href={new URL('/', Astro.site ?? site.url).toString()}
+    />
 
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
@@ -63,6 +82,8 @@ const altLangUrl = new URL(altPath, Astro.site ?? site.url).toString();
     <meta name="twitter:title" content={pageTitle} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
+
+    <script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
 
     <link rel="sitemap" href="/sitemap-index.xml" />
     <link

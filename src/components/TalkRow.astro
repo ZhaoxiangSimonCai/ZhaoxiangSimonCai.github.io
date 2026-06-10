@@ -1,0 +1,61 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { Icon } from 'astro-icon/components';
+import { getLang, t, talksZh } from '~/i18n';
+
+export interface Props {
+  talk: CollectionEntry<'talks'>;
+}
+
+const { talk } = Astro.props;
+const d = talk.data;
+const lang = getLang(Astro.url.pathname);
+const tr = t(lang);
+
+const zh = lang === 'zh' ? talksZh[talk.slug] : undefined;
+const event = zh?.event ?? d.event;
+const location = zh?.location ?? d.location;
+const summary = zh?.summary ?? d.summary;
+
+// Past talks are verified at event/year level only; talks with a verified
+// title (and full-precision date) show the title as headline.
+const headline = d.title ?? event;
+const subline = d.title ? [event, location].filter(Boolean).join(' · ') : location;
+
+const dateLabel =
+  d.datePrecision === 'full'
+    ? d.date.toLocaleDateString(lang === 'zh' ? 'zh-CN' : 'en-AU', {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric',
+      })
+    : String(d.date.getFullYear());
+
+const typeLabel = tr.talks.types[d.type];
+---
+
+<article
+  class="flex flex-col gap-1 border-b border-border py-5 last:border-b-0 md:flex-row md:items-baseline md:gap-6"
+>
+  <div class="flex min-w-[9rem] items-center gap-2 text-sm text-muted md:block">
+    <span class="font-mono text-xs uppercase tracking-wide">{dateLabel}</span>
+    <span class="chip-accent ml-2 hidden md:ml-0 md:mt-1 md:inline-flex">{typeLabel}</span>
+  </div>
+  <div class="flex-1">
+    <h3 class="font-display text-base font-semibold leading-snug text-fg md:text-lg">
+      {
+        d.url ? (
+          <a href={d.url} class="link-underline" rel="noopener noreferrer" target="_blank">
+            {headline}
+            <Icon name="lucide:arrow-up-right" class="ml-0.5 inline h-3.5 w-3.5 opacity-60" />
+          </a>
+        ) : (
+          headline
+        )
+      }
+    </h3>
+    {subline && <div class="mt-1 text-sm text-muted">{subline}</div>}
+    {summary && <p class="mt-2 max-w-prose text-sm text-muted">{summary}</p>}
+    <span class="chip-accent mt-2 md:hidden">{typeLabel}</span>
+  </div>
+</article>

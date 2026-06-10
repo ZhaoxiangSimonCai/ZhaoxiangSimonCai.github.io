@@ -8,6 +8,8 @@ import { t } from '~/i18n';
 
 const tr = t('zh');
 const pubs = sortByDateDesc(await getCollection('publications'));
+// The description claims 同行评审, so exclude preprints from its count.
+const peerReviewedCount = pubs.filter((p) => p.data.publicationType !== 'preprint').length;
 
 const byYear = new Map<number, typeof pubs>();
 for (const p of pubs) {
@@ -27,7 +29,7 @@ const allTags = [...new Set(pubs.flatMap((p) => p.data.tags))].sort();
   <Section
     label={tr.research.label}
     title={tr.research.title}
-    description={tr.research.description(pubs.length)}
+    description={tr.research.description(peerReviewedCount)}
   >
     <div class="mb-10 flex flex-wrap items-center gap-2" role="group" aria-label={tr.research.filterAria}>
       <button data-tag="" class="chip-accent data-[active=true]:bg-accent data-[active=true]:text-white" data-active="true">

@@ -71,6 +71,28 @@ paper: "https://doi.org/…"
 ---
 ```
 
+### Add a talk
+
+Create `src/content/talks/<slug>/index.mdx`. Frontmatter:
+
+```yaml
+---
+title: "Talk title"               # optional — only when the exact title is verified
+event: "Conference name"
+location: "Sydney, Australia"     # optional
+date: "2026-06-05"                # sort key; approximate if datePrecision is "year"
+datePrecision: "full"             # "year" (default, shows year only) | "full"
+type: "oral"                      # invited | oral | poster | seminar | media
+url: "https://…"                  # optional
+summary: "Optional description."
+---
+```
+
+Past talks verified only at event/year level should omit `title` and keep the
+default `datePrecision: "year"` — the row then shows the event name and bare
+year. Add Chinese display strings for the new slug to `talksZh` in
+[`src/i18n/strings.ts`](src/i18n/strings.ts).
+
 ### Update Experience
 
 `src/content/experience/NN-slug.json` — ordered JSON files.
@@ -83,7 +105,7 @@ homepage spotlight strip. Update h-index, citations, etc. once a month from
 
 ### Update bio / site details
 
-- Bio prose: [`src/pages/about.astro`](src/pages/about.astro)
+- Bio prose (EN + ZH): `about.bio` in [`src/i18n/strings.ts`](src/i18n/strings.ts)
 - Site name, socials, nav, affiliations: [`src/data/site.ts`](src/data/site.ts)
 - Education / awards / skills: [`src/data/education.ts`](src/data/education.ts)
 

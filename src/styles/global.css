@@ -27,7 +27,7 @@
     --surface: 18 21 26;
     --surface-2: 25 29 36;
     --fg: 236 235 228;
-    --muted: 141 147 161;
+    --muted: 158 165 179;
     --border: 35 39 46;
     --accent: 255 74 92;
     --accent-2: 108 160 232;
@@ -64,6 +64,13 @@
   a {
     color: inherit;
     text-decoration: none;
+  }
+
+  /* Visible keyboard-focus ring on all interactive elements; :where() keeps
+     specificity at zero so component classes still win on colour. */
+  :where(a, button, [tabindex]):focus-visible {
+    outline: 2px solid rgb(var(--accent));
+    outline-offset: 2px;
   }
 
   /* Smooth theme transition (skip motion-reduce users) */

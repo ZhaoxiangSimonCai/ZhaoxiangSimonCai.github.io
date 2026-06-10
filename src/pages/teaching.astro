@@ -7,6 +7,7 @@ import {
   postdocSupervision,
   thesisExamination,
   informalMentorship,
+  formalTeaching,
   professionalTraining,
 } from '~/data/teaching';
 import type { SuperviseeEntry } from '~/data/teaching';
@@ -36,11 +37,7 @@ const supervisionGroups: { label: string; title: string; items: readonly Supervi
   title="Teaching"
   description="Teaching, HDR supervision, postdoctoral mentoring, thesis examination, and informal mentorship by Zhaoxiang (Simon) Cai — cancer data scientist at CMRI / University of Sydney."
 >
-  <Section
-    label="Teaching & supervision"
-    title="Teaching"
-    description={intro}
-  />
+  <Section label="Teaching & supervision" title="Teaching" description={intro} />
 
   {
     supervisionGroups.map((group) => (
@@ -85,6 +82,22 @@ const supervisionGroups: { label: string; title: string; items: readonly Supervi
         ))
       }
     </div>
+  </Section>
+
+  <Section label="Teaching experience" title="Coursework teaching" bordered>
+    <ul class="max-w-3xl divide-y divide-border">
+      {
+        formalTeaching.map((f) => (
+          <li class="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 py-3">
+            <div class="flex items-baseline gap-3">
+              <span class="font-mono text-xs text-muted">{f.years}</span>
+              <span class="text-fg">{f.role}</span>
+            </div>
+            <span class="text-sm text-muted">{f.institution}</span>
+          </li>
+        ))
+      }
+    </ul>
   </Section>
 
   <Section label="Professional training" title="Supervision training" bordered>

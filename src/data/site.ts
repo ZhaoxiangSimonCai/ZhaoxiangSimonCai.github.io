@@ -12,6 +12,7 @@ export const site = {
   nav: [
     { href: '/research/', label: 'Research' },
     { href: '/projects/', label: 'Projects' },
+    { href: '/talks/', label: 'Talks' },
     { href: '/teaching/', label: 'Teaching' },
     { href: '/about/', label: 'About' },
     { href: '/cv/', label: 'CV' },
@@ -27,14 +28,18 @@ export const site = {
     {
       name: "Children's Medical Research Institute",
       nameShort: 'CMRI',
+      nameShortZh: 'CMRI',
       role: 'Senior Data Scientist (Cancer Data Science)',
+      roleZh: '高级数据科学家（癌症数据科学）',
       url: 'https://www.cmrijeansforgenes.org.au/research/research-teams/procan',
       logo: '/logos/cmri.svg',
     },
     {
       name: 'The University of Sydney',
       nameShort: 'USyd',
+      nameShortZh: '悉尼大学',
       role: 'Adjunct Lecturer',
+      roleZh: '兼任讲师（Adjunct Lecturer）',
       url: 'https://www.sydney.edu.au/',
       logo: '/logos/usyd.svg',
     },

@@ -1,0 +1,22 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import Section from '~/components/Section.astro';
+import TalkRow from '~/components/TalkRow.astro';
+import { sortByDateDesc } from '~/lib/format';
+import { t } from '~/i18n';
+
+const tr = t('zh');
+const talks = sortByDateDesc(await getCollection('talks'));
+---
+
+<BaseLayout
+  title={tr.talks.title}
+  description="蔡兆祥（Simon）的学术报告：会议受邀报告、口头报告、海报展示、机构学术讲座与媒体报道。"
+>
+  <Section label={tr.talks.label} title={tr.talks.title} description={tr.talks.description}>
+    <div class="max-w-4xl">
+      {talks.map((tk) => <TalkRow talk={tk} />)}
+    </div>
+  </Section>
+</BaseLayout>

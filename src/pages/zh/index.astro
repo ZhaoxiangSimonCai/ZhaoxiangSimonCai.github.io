@@ -6,6 +6,7 @@ import SpotlightStrip from '~/components/SpotlightStrip.astro';
 import Section from '~/components/Section.astro';
 import PublicationCard from '~/components/PublicationCard.astro';
 import ProjectCard from '~/components/ProjectCard.astro';
+import TalkRow from '~/components/TalkRow.astro';
 import CollaboratorLogos from '~/components/CollaboratorLogos.astro';
 import { sortByDateDesc } from '~/lib/format';
 import { Icon } from 'astro-icon/components';
@@ -13,13 +14,15 @@ import { t } from '~/i18n';
 
 const tr = t('zh');
 
-const [allPubs, allProjects] = await Promise.all([
+const [allPubs, allProjects, allTalks] = await Promise.all([
   getCollection('publications'),
   getCollection('projects'),
+  getCollection('talks'),
 ]);
 
 const featuredPubs = sortByDateDesc(allPubs.filter((p) => p.data.featured)).slice(0, 4);
 const featuredProjects = sortByDateDesc(allProjects.filter((p) => p.data.featured)).slice(0, 6);
+const recentTalks = sortByDateDesc(allTalks).slice(0, 3);
 ---
 
 <BaseLayout>
@@ -68,31 +71,51 @@ const featuredProjects = sortByDateDesc(allProjects.filter((p) => p.data.feature
         href="/zh/research/"
         class="inline-flex items-center gap-1.5 text-sm font-medium text-accent hover:opacity-80"
       >
-        {tr.home.featuredAll} <Icon name="lucide:arrow-right" class="h-4 w-4" />
+        {tr.home.featuredAll}
+        <Icon name="lucide:arrow-right" class="h-4 w-4" />
       </a>
     </div>
   </Section>
 
-  {featuredProjects.length > 0 && (
-    <Section
-      label={tr.home.projectsLabel}
-      title={tr.home.projectsTitle}
-      description={tr.home.projectsDescription}
-      bordered
-    >
-      <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-        {featuredProjects.map((p) => <ProjectCard project={p} />)}
-      </div>
-      <div class="mt-8">
-        <a
-          href="/zh/projects/"
-          class="inline-flex items-center gap-1.5 text-sm font-medium text-accent hover:opacity-80"
-        >
-          {tr.home.projectsAll} <Icon name="lucide:arrow-right" class="h-4 w-4" />
-        </a>
-      </div>
-    </Section>
-  )}
+  {
+    featuredProjects.length > 0 && (
+      <Section
+        label={tr.home.projectsLabel}
+        title={tr.home.projectsTitle}
+        description={tr.home.projectsDescription}
+        bordered
+      >
+        <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {featuredProjects.map((p) => (
+            <ProjectCard project={p} />
+          ))}
+        </div>
+        <div class="mt-8">
+          <a
+            href="/zh/projects/"
+            class="inline-flex items-center gap-1.5 text-sm font-medium text-accent hover:opacity-80"
+          >
+            {tr.home.projectsAll} <Icon name="lucide:arrow-right" class="h-4 w-4" />
+          </a>
+        </div>
+      </Section>
+    )
+  }
+
+  <Section label={tr.home.talksLabel} title={tr.home.talksTitle} bordered>
+    <div class="max-w-4xl">
+      {recentTalks.map((tk) => <TalkRow talk={tk} />)}
+    </div>
+    <div class="mt-8">
+      <a
+        href="/zh/talks/"
+        class="inline-flex items-center gap-1.5 text-sm font-medium text-accent hover:opacity-80"
+      >
+        {tr.home.talksAll}
+        <Icon name="lucide:arrow-right" class="h-4 w-4" />
+      </a>
+    </div>
+  </Section>
 
   <Section label={tr.home.collabsLabel} title={tr.home.collabsTitle} bordered>
     <CollaboratorLogos />

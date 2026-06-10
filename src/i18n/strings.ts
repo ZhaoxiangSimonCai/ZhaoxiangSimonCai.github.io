@@ -11,6 +11,7 @@ export const strings = {
     nav: {
       research: 'Research',
       projects: 'Projects',
+      talks: 'Talks',
       teaching: 'Teaching',
       about: 'About',
       cv: 'CV',
@@ -73,6 +74,9 @@ export const strings = {
       projectsTitle: 'Selected projects',
       projectsDescription: 'Code, datasets, and research artefacts.',
       projectsAll: 'All projects',
+      talksLabel: 'Talks',
+      talksTitle: 'Recent presentations',
+      talksAll: 'All talks',
       collabsLabel: 'Collaborators',
       collabsTitle: 'Affiliations & collaborations',
       themes: [
@@ -86,7 +90,7 @@ export const strings = {
         {
           title: 'Generative AI',
           description:
-            'Variational autoencoders and diffusion models to augment scarce multi-omic datasets and impute missing measurements.',
+            'Variational autoencoders and other generative models to augment scarce multi-omic datasets and impute missing measurements.',
           tag: 'Generative AI',
           icon: 'lucide:sparkles',
         },
@@ -110,7 +114,7 @@ export const strings = {
       label: 'Publications',
       title: 'Research',
       description: (n: number) =>
-        `${n} peer-reviewed publications — filter by theme or browse chronologically.`,
+        `${n} peer-reviewed publications — 5 as first or co-first author, cited over 900 times in total. Filter by theme or browse chronologically.`,
       filterAria: 'Filter by tag',
       allCount: (n: number) => `All (${n})`,
       backToList: 'All research',
@@ -134,13 +138,26 @@ export const strings = {
       paperBtn: 'Paper',
       websiteBtn: 'Website',
     },
+    talks: {
+      label: 'Speaking',
+      title: 'Talks & presentations',
+      description:
+        'Invited, oral, and poster presentations at international and national conferences, institutional seminars, and media engagement.',
+      types: {
+        invited: 'Invited',
+        oral: 'Oral',
+        poster: 'Poster',
+        seminar: 'Seminar',
+        media: 'Media',
+      },
+    },
     about: {
       label: 'About',
       title: 'Biography',
       bio: [
-        `I am a cancer data scientist specialising in artificial intelligence and machine learning for large-scale molecular data analysis. I hold a first-class honours degree in Computer Science from Monash University, where I graduated as the top student, and a PhD in Cancer Data Science from the University of Sydney. After gaining software engineering experience at Goldman Sachs, I transitioned to cancer research and now serve as an Adjunct Lecturer at the University of Sydney and Senior Data Scientist at the Children's Medical Research Institute (CMRI).`,
-        `My research focuses on developing and applying deep learning methods to cancer multi-omics data, with particular expertise in federated learning, generative models, and transformer architectures. As co-first author on the landmark *Cancer Cell* study mapping the proteomic landscape of 949 human cancer cell lines, I contributed to one of the field's most widely used resources (230+ citations). My subsequent first-author publications in *Cancer Discovery* and *Nature Communications* have introduced novel approaches in federated deep learning for privacy-preserving cancer subtyping, and generative AI for synthetic augmentation of multi-omic datasets. I maintain active international collaborations with the Wellcome Sanger Institute (UK) and the University of Lisbon (Portugal).`,
-        `In 2025, I was awarded a Cancer Institute NSW Early Career Fellowship to develop proteomic foundation models integrated with federated learning for multi-hospital cancer research. My work to date has generated over 900 citations (h-index: 8) and I have contributed to more than $1.59 million in competitive research funding. I am driven by the goal of translating advanced computational methods into practical tools that improve cancer diagnosis and prognosis through precision medicine.`,
+        `I am a cancer data scientist working at the intersection of deep learning and large-scale molecular biology. I read Computer Science at Monash University, graduating top of my cohort, then spent several years building electronic-trading systems at Goldman Sachs before moving into cancer research. I completed my PhD in Cancer Data Science at the University of Sydney and the Children's Medical Research Institute (CMRI), where I am now a Senior Data Scientist; I also hold an Adjunct Lecturer appointment at the University of Sydney.`,
+        `My research develops federated, generative, and transformer-based deep-learning methods for cancer multi-omics. As co-first author of the *Cancer Cell* pan-cancer proteomic map of 949 human cancer cell lines, I helped build one of the field's most widely used resources. My first-author publications introduced federated deep learning for privacy-preserving cancer subtyping — the first application of federated deep learning to cancer proteomics, spanning some 7,500 proteomes (*Cancer Discovery*) — and MOSA, a generative-AI approach to synthetic augmentation of multi-omic datasets (*Nature Communications*). I maintain active international collaborations with the Wellcome Sanger Institute (UK) and the University of Lisbon (Portugal).`,
+        `In 2025 I was awarded a Cancer Institute NSW Early Career Fellowship as sole chief investigator, supporting a three-year programme on proteomic foundation models integrated with federated learning for multi-hospital cancer research. Throughout, my goal is to translate advanced computational methods into practical tools that improve cancer diagnosis and prognosis through precision oncology.`,
       ],
       experienceLabel: 'Experience',
       experienceTitle: 'Professional appointments',
@@ -170,6 +187,8 @@ export const strings = {
       },
       mentorshipLabel: 'Informal mentorship',
       mentorshipTitle: 'Mentorship at CMRI',
+      formalLabel: 'Teaching experience',
+      formalTitle: 'Coursework teaching',
       trainingLabel: 'Professional training',
       trainingTitle: 'Supervision training',
       project: 'Project:',
@@ -179,8 +198,7 @@ export const strings = {
       title: 'Full CV',
       description: (date: string) =>
         `Last updated ${date}. Download the PDF or view it inline below.`,
-      iframeFallback:
-        'If the PDF does not render (some browsers block embedded PDFs),',
+      iframeFallback: 'If the PDF does not render (some browsers block embedded PDFs),',
       downloadIt: 'download it directly',
       iframeTitle: 'Curriculum Vitae',
     },
@@ -198,6 +216,7 @@ export const strings = {
     nav: {
       research: '研究',
       projects: '项目',
+      talks: '报告',
       teaching: '教学',
       about: '关于',
       cv: '简历',
@@ -228,7 +247,7 @@ export const strings = {
     hero: {
       eyebrow: '癌症数据科学 · 悉尼',
       taglinePart1: '现任',
-      taglineMid: '高级数据科学家，并兼任',
+      taglineMid: '高级数据科学家，并担任',
       taglineEnd:
         '医学与健康学院兼任讲师（Adjunct Lecturer）。我研究面向癌症多组学的深度学习方法，包括联邦学习、生成式模型与 Transformer 架构，致力于将其转化为可用于临床的精准肿瘤学工具。',
       ctaEmail: '邮箱',
@@ -259,6 +278,9 @@ export const strings = {
       projectsTitle: '精选项目',
       projectsDescription: '代码、数据集与研究成果。',
       projectsAll: '查看全部项目',
+      talksLabel: '学术报告',
+      talksTitle: '近期报告',
+      talksAll: '查看全部报告',
       collabsLabel: '合作机构',
       collabsTitle: '所属机构与合作单位',
       themes: [
@@ -272,7 +294,7 @@ export const strings = {
         {
           title: '生成式 AI',
           description:
-            '使用变分自编码器与扩散模型扩充稀缺的多组学数据集，并对缺失测量进行填补，以提升下游分析的统计效力。',
+            '使用变分自编码器等生成式模型扩充稀缺的多组学数据集，并对缺失测量进行填补，以提升下游分析的统计效力。',
           tag: 'Generative AI',
           icon: 'lucide:sparkles',
         },
@@ -295,7 +317,8 @@ export const strings = {
     research: {
       label: '论文',
       title: '研究',
-      description: (n: number) => `${n} 篇同行评审论文 —— 可按主题筛选或按时间浏览。`,
+      description: (n: number) =>
+        `${n} 篇同行评审论文，其中 5 篇为第一/共同第一作者，累计被引用 900 余次。可按主题筛选或按时间浏览。`,
       filterAria: '按标签筛选',
       allCount: (n: number) => `全部 (${n})`,
       backToList: '所有研究',
@@ -319,14 +342,26 @@ export const strings = {
       paperBtn: '论文',
       websiteBtn: '网站',
     },
+    talks: {
+      label: '学术报告',
+      title: '报告与演讲',
+      description:
+        '在国际及全国性学术会议上的受邀报告、口头报告与海报展示，以及机构内学术讲座与媒体访谈。',
+      types: {
+        invited: '受邀报告',
+        oral: '口头报告',
+        poster: '海报展示',
+        seminar: '学术讲座',
+        media: '媒体',
+      },
+    },
     about: {
       label: '关于',
       title: '个人简介',
       bio: [
-        '我是一名癌症数据科学家，致力于运用人工智能与机器学习方法分析大规模分子数据。本科以一等荣誉学位毕业于莫纳什大学（Monash University）计算机科学专业，并获专业第一名；随后于悉尼大学（University of Sydney）取得癌症数据科学博士学位。在高盛（Goldman Sachs）担任软件工程师多年后，我转入癌症研究领域，现任儿童医学研究所（Children’s Medical Research Institute，CMRI）高级数据科学家，并兼任悉尼大学医学与健康学院兼任讲师（Adjunct Lecturer）。',
-        '我的研究聚焦于深度学习方法在癌症多组学数据中的应用，擅长联邦学习、生成模型与 Transformer 架构等方向。作为 *Cancer Cell* 杂志上 949 株人类癌细胞系泛癌蛋白质组图谱研究的共同第一作者（被引用超过 230 次），我参与构建了该领域被广泛使用的代表性资源；随后以第一作者身份在 *Cancer Discovery*、*Nature Communications* 与 *Cancer Research Communications* 上发表系列工作，分别提出面向癌症亚型分类的隐私保护联邦深度学习框架、用于多组学数据合成增强的生成式 AI 方法，以及结合生物通路信息的 Transformer 多组学整合模型。我与英国 Wellcome Sanger Institute、葡萄牙里斯本大学（Universidade de Lisboa）等机构保持长期的国际合作。',
-        '2025 年，我获颁澳大利亚新南威尔士州癌症研究所青年学者基金（Cancer Institute NSW Early Career Fellowship；$597,732，2026–2028），以独立首席研究员身份开展结合联邦学习的蛋白质组基础模型研究，服务多中心癌症诊疗；同时作为联合研究员（Associate Investigator）参与一项面向儿童高级别胶质瘤免疫治疗的医学研究未来基金项目（MRFF；$993,500）。截至目前，我的工作累计获得 900 余次引用（h 指数 8），共参与超过 159 万澳元的竞争性科研经费。',
-        '在学术服务方面，我自 2023 年起发起并主持 ProCan 癌症数据科学期刊讨论会（Cancer Data Science Journal Club），并定期为 Nature Communications、Genome Biology、Briefings in Bioinformatics 等期刊审稿，以及为香港创新科技署、荷兰研究理事会（NWO）等机构评审基金申请。我希望将先进的计算方法持续转化为可临床应用的工具，通过精准医疗改善癌症的诊断与预后。',
+        '我是一名癌症数据科学家，研究方向处于深度学习与大规模分子生物学的交叉领域。本科以一等荣誉学位毕业于莫纳什大学（Monash University）计算机科学专业，并获专业第一名；随后在高盛（Goldman Sachs）从事电子交易系统开发数年，之后转入癌症研究领域，于悉尼大学（University of Sydney）与儿童医学研究所（CMRI）完成癌症数据科学博士学位。现任 CMRI 高级数据科学家，并担任悉尼大学医学与健康学院兼任讲师（Adjunct Lecturer）。',
+        '我的研究聚焦面向癌症多组学的联邦学习、生成式模型与 Transformer 方法。作为发表于 *Cancer Cell* 的 949 株人类癌细胞系泛癌蛋白质组图谱研究的共同第一作者，我参与构建了该领域被广泛使用的代表性数据资源。我的第一作者工作包括：面向癌症亚型分类的隐私保护联邦深度学习框架（*Cancer Discovery*）——这是联邦深度学习在癌症蛋白质组学中的首次应用，覆盖约 7,500 个癌症蛋白质组；以及用于多组学数据合成增强的生成式 AI 方法 MOSA（*Nature Communications*）。我与英国 Wellcome Sanger Institute、葡萄牙里斯本大学（Universidade de Lisboa）等机构保持长期的国际合作。',
+        '2025 年，我获颁澳大利亚新南威尔士州癌症研究所青年学者基金（Cancer Institute NSW Early Career Fellowship），以独立首席研究员身份开展为期三年的研究计划，构建结合联邦学习的蛋白质组基础模型，服务多中心癌症研究。我始终致力于将先进的计算方法转化为可临床应用的工具，通过精准肿瘤学改善癌症的诊断与预后。',
       ],
       experienceLabel: '工作经历',
       experienceTitle: '职业任职',
@@ -352,6 +387,8 @@ export const strings = {
       },
       mentorshipLabel: '非正式指导',
       mentorshipTitle: 'CMRI 同事指导',
+      formalLabel: '课程教学',
+      formalTitle: '课堂教学经历',
       trainingLabel: '导师培训',
       trainingTitle: '导师培训资质',
       project: '研究方向：',
@@ -451,6 +488,10 @@ interface AwardZh {
 
 export const awardsZh: readonly AwardZh[] = [
   {
+    year: 2026,
+    title: '澳大利亚癌症生物信息学研讨会（Cancer Bioinformatics Australia Symposium）差旅奖学金',
+  },
+  {
     year: 2025,
     title:
       '新南威尔士州癌症研究所青年学者基金（Cancer Institute NSW Early Career Fellowship） —— 独立首席研究员',
@@ -519,13 +560,13 @@ export const serviceItemsZh = [
     category: '同行评审',
     title: '国际期刊审稿',
     detail:
-      '担任 Nature Communications、Genome Biology、Briefings in Bioinformatics 等高水平国际期刊的审稿人，每年若干篇。',
+      '担任 Nature Communications、Genome Biology、Briefings in Bioinformatics 等高水平国际期刊的审稿人，自 2023 年起每年评审约 5 篇稿件。',
   },
   {
     category: '基金评审',
     title: '国际科研基金评审',
     detail:
-      '担任香港创新科技署（Innovation and Technology Commission，2025）及荷兰研究理事会（Dutch Research Council，NWO，2025）的基金申请外部评审专家。',
+      '受邀担任香港创新科技署（Innovation and Technology Commission，2025）及荷兰研究理事会（Dutch Research Council，NWO，2025）基金申请的外部评审专家。',
   },
   {
     category: '行业参与',
@@ -566,7 +607,7 @@ export const teachingZh = {
       name: 'Ms Rita Brito Gama',
       role: '哲学硕士（MPhil）—— 校外论文评审',
       institution: '里斯本大学（Universidade de Lisboa，葡萄牙）',
-      years: '2024',
+      years: '2025',
       project:
         'GAIN-DANN: A Domain-Adversarial Generative Model for Missing Data Imputation in Proteomics',
       contribution:
@@ -579,24 +620,83 @@ export const teachingZh = {
     {
       title: '合作发表 Cancer Discovery 论文',
       detail:
-        '对 CMRI 同事 Dr Emma Boys 的指导，直接促成了一篇 Cancer Discovery（2025）合作论文的发表。',
+        '指导 Dr Emma Boys（肿瘤内科医生、博士研究生）开展原发灶不明癌症（CUP）的机器学习方法研究，直接促成了一篇 Cancer Discovery（2025）合作论文的发表。',
     },
     {
-      title: 'CMRI 博士研究生支持',
-      detail: '为 CMRI 内两名博士研究生在机器学习、生物信息学与蛋白质组数据分析方向提供持续的方法指导。',
-    },
-    {
-      title: '跨团队计算支持',
+      title: '临床研究者指导',
       detail:
-        '经常向 ProCan 项目下癌症数据科学、软件工程与肿瘤学等团队的同事提供非正式的计算与统计支持。',
+        '持续为 Dr Liz Connolly（肿瘤内科医生、博士研究生）的前列腺癌研究提供生物信息学分析、差异表达与生存分析方面的技术指导。',
+    },
+    {
+      title: '初级研究人员入职指导',
+      detail: '帮助 Dr Di Xiao 融入癌症数据科学团队，并就计算平台与分析工具提供指导。',
+    },
+  ],
+  formalTeaching: [
+    {
+      role: '助教（Casual Tutor）—— 算法与数据结构',
+      institution: '莫纳什大学（Monash University）',
+      years: '2013 – 2014',
+      note: '主讲计算机课程辅导课，帮助学生掌握算法设计与实现。',
     },
   ],
   professionalTraining: [
     {
-      title: '悉尼大学博士生导师培训课程（Higher Degree Research Student Supervisor Training Course）',
+      title:
+        '悉尼大学博士生导师培训课程（Higher Degree Research Student Supervisor Training Course）',
       institution: '悉尼大学',
       year: '2024',
       note: '为在医学与健康学院承担正式博士生指导职责做好准备。',
     },
   ],
 } as const;
+
+export interface TalkZh {
+  event?: string;
+  location?: string;
+  summary?: string;
+}
+
+// Chinese display strings for talks, keyed by content-collection slug.
+// English talk titles (when present) are shown as-is per site convention.
+export const talksZh: Record<string, TalkZh> = {
+  cba2026: {
+    event: '澳大利亚癌症生物信息学研讨会（Cancer Bioinformatics Australia Symposium）',
+    location: '皇家布里斯班和妇女医院教育中心',
+    summary: '入选口头报告，获 CBA 差旅奖学金资助。',
+  },
+  'advancing-multiomics-2024': {
+    event: '“多组学走向临床”研讨会（Advancing Multi-Omics into the Clinic Symposium）',
+  },
+  asms2022: {
+    event: '第 70 届美国质谱学会（ASMS）质谱及相关主题年会',
+    location: '美国明尼阿波利斯',
+  },
+  kca2021: {
+    event: 'KCA 儿童癌症精准医疗研讨会（KCA Precision Medicine for Childhood Cancer Symposium）',
+  },
+  'abacbs-phylomania-2021': {
+    event: 'ABACBS 与 Phylomania 联合会议（线上线下混合）',
+  },
+  'abacbs2023-poster': {
+    event: '澳大利亚生物信息学与计算生物学学会（ABACBS）年会',
+  },
+  'ismb2023-poster': {
+    event: '分子生物学智能系统国际会议（ISMB）',
+  },
+  'hupo2022-poster': {
+    event: '国际人类蛋白质组组织（HUPO）世界大会',
+  },
+  'abacbs2022-poster': {
+    event: '澳大利亚生物信息学与计算生物学学会（ABACBS）年会',
+  },
+  'cmri-seminar-2023': {
+    event: 'CMRI 全所学术报告会',
+    summary: '面向全所介绍癌症多组学数据分析的计算方法。',
+  },
+  'abc-radio-2022': {
+    event: '澳大利亚广播公司（ABC）电台采访',
+    summary:
+      '就发表于 Cancer Cell 的 949 株人类癌细胞系泛癌蛋白质组图谱研究接受电台采访，向公众介绍其研究意义。',
+  },
+};

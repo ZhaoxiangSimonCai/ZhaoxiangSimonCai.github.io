@@ -1,7 +1,18 @@
 import { strings, type Lang } from './strings';
 
 export type { Lang } from './strings';
-export { strings, expRoleZh, expCompanyZh, expDescZh, educationZh, awardsZh, skillGroupsZh, serviceItemsZh, teachingZh } from './strings';
+export {
+  strings,
+  expRoleZh,
+  expCompanyZh,
+  expDescZh,
+  educationZh,
+  awardsZh,
+  skillGroupsZh,
+  serviceItemsZh,
+  teachingZh,
+  talksZh,
+} from './strings';
 
 export const LANGS: readonly Lang[] = ['en', 'zh'];
 

@@ -12,6 +12,7 @@ const home = withLocale('/', lang);
 const navItems = [
   { href: withLocale('/research/', lang), label: tr.nav.research },
   { href: withLocale('/projects/', lang), label: tr.nav.projects },
+  { href: withLocale('/talks/', lang), label: tr.nav.talks },
   { href: withLocale('/teaching/', lang), label: tr.nav.teaching },
   { href: withLocale('/about/', lang), label: tr.nav.about },
   { href: withLocale('/cv/', lang), label: tr.nav.cv },
@@ -67,7 +68,7 @@ const isActive = (href: string) => {
       <button
         id="menu-toggle"
         type="button"
-        class="md:hidden rounded-md p-2 text-muted transition hover:bg-surface-2 hover:text-fg"
+        class="rounded-md p-2 text-muted transition hover:bg-surface-2 hover:text-fg md:hidden"
         aria-label={tr.common.openMenu}
         aria-expanded="false"
         aria-controls="mobile-menu"

@@ -41,7 +41,7 @@ export const thesisExamination: readonly SuperviseeEntry[] = [
     name: 'Ms Rita Brito Gama',
     role: 'External thesis examiner — Master of Philosophy',
     institution: 'University of Lisbon',
-    years: '2024',
+    years: '2025',
     project:
       'GAIN-DANN: A Domain-Adversarial Generative Model for Missing Data Imputation in Proteomics',
     contribution:
@@ -55,20 +55,29 @@ export const informalMentorship = {
     {
       title: 'Co-authored Cancer Discovery publication',
       detail:
-        'Mentorship of Dr Emma Boys at CMRI contributed directly to a co-authored publication in Cancer Discovery (2025).',
+        'Mentorship of Dr Emma Boys (medical oncologist and PhD candidate) on machine-learning methods for Cancers of Unknown Primary contributed directly to a co-authored publication in Cancer Discovery (2025).',
     },
     {
-      title: 'CMRI PhD candidates',
+      title: 'Clinician-researcher mentorship',
       detail:
-        'Active mentorship of two CMRI-based PhD candidates in machine learning, bioinformatics, and proteomic data analysis.',
+        'Ongoing technical guidance for Dr Liz Connolly (medical oncologist and PhD candidate) on bioinformatic analysis, differential expression, and survival analysis for prostate cancer research.',
     },
     {
-      title: 'Cross-team computational guidance',
+      title: 'Junior researcher onboarding',
       detail:
-        'Regular informal computational guidance to colleagues across the ProCan Cancer Data Science, Software Engineering, and Oncology teams.',
+        'Supported the integration of Dr Di Xiao into the Cancer Data Science team, with guidance on computational platforms and analytical tools.',
     },
   ],
 } as const;
+
+export const formalTeaching = [
+  {
+    role: 'Casual Tutor — Algorithms & Data Structures',
+    institution: 'Monash University',
+    years: '2013 – 2014',
+    note: 'Delivered tutorials in computational subjects supporting student learning in algorithm design and implementation.',
+  },
+] as const;
 
 export const professionalTraining = [
   {

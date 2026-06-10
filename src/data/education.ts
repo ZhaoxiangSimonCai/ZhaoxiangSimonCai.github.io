@@ -27,6 +27,10 @@ export interface Award {
 
 export const awards: readonly Award[] = [
   {
+    year: 2026,
+    title: 'Cancer Bioinformatics Australia Symposium Travel Scholarship',
+  },
+  {
     year: 2025,
     title: 'Cancer Institute NSW Early Career Fellowship — Sole Chief Investigator',
     amount: '$597,732 (2026–2028)',
@@ -39,8 +43,16 @@ export const awards: readonly Award[] = [
   },
   { year: 2022, title: 'Sydney Cancer Partners PhD Scholarship' },
   { year: 2020, title: 'CMRI Peter Rowe PhD Scholarship' },
-  { year: 2019, title: 'University of Sydney Innovation Challenge', amount: '1st Prize ($7,500; also 2020)' },
-  { year: 2019, title: 'ODIR-2019 International Computer Vision Competition', amount: '3rd Prize (\u2248$20,000)' },
+  {
+    year: 2019,
+    title: 'University of Sydney Innovation Challenge',
+    amount: '1st Prize ($7,500; also 2020)',
+  },
+  {
+    year: 2019,
+    title: 'ODIR-2019 International Computer Vision Competition',
+    amount: '3rd Prize (\u2248$20,000)',
+  },
   { year: 2013, title: 'Dux of Bachelor of Computer Science', amount: 'Monash University' },
 ];
 
@@ -61,13 +73,13 @@ export const serviceItems: readonly ServiceItem[] = [
     category: 'Peer review',
     title: 'Manuscript review',
     detail:
-      'Reviewer for high-impact international journals including Nature Communications, Genome Biology, and Briefings in Bioinformatics. Approximately annual cadence.',
+      'Reviewer for high-impact international journals including Nature Communications, Genome Biology, and Briefings in Bioinformatics, among others — approximately five manuscripts per year since 2023.',
   },
   {
     category: 'Grant assessment',
     title: 'International funding bodies',
     detail:
-      'External reviewer for grant applications to the Innovation and Technology Commission (Hong Kong, 2025) and the Dutch Research Council (NWO, 2025).',
+      'Invited external expert reviewer for grant applications to the Innovation and Technology Commission (Hong Kong, 2025) and the Dutch Research Council (NWO, Netherlands, 2025).',
   },
   {
     category: 'Sector engagement',
@@ -80,7 +92,14 @@ export const serviceItems: readonly ServiceItem[] = [
 export const skillGroups = [
   {
     title: 'Machine learning & AI',
-    items: ['Deep neural networks', 'Transformers', 'Variational autoencoders', 'Generative models', 'Federated learning', 'Multi-view integration'],
+    items: [
+      'Deep neural networks',
+      'Transformers',
+      'Variational autoencoders',
+      'Generative models',
+      'Federated learning',
+      'Multi-view integration',
+    ],
   },
   {
     title: 'Bioinformatics & multi-omics',
