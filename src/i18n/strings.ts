@@ -501,7 +501,7 @@ export const awardsZh: readonly AwardZh[] = [
     year: 2024,
     title:
       '澳大利亚医学研究未来基金（MRFF） · 早中期研究员资助 —— 联合研究员（Associate Investigator，儿童高级别胶质瘤免疫治疗方向）',
-    amount: '$993,500（2024–2027）',
+    amount: '$993,500（2024–2026）',
   },
   { year: 2022, title: 'Sydney Cancer Partners 博士奖学金' },
   { year: 2020, title: 'CMRI Peter Rowe 博士奖学金' },

@@ -39,7 +39,7 @@ export const awards: readonly Award[] = [
     year: 2024,
     title:
       'Medical Research Future Fund (MRFF) Early to Mid-Career Researchers — Associate Investigator (paediatric high-grade glioma immunotherapy)',
-    amount: '$993,500 (2024–2027)',
+    amount: '$993,500 (2024–2026)',
   },
   { year: 2022, title: 'Sydney Cancer Partners PhD Scholarship' },
   { year: 2020, title: 'CMRI Peter Rowe PhD Scholarship' },
