@@ -45,14 +45,19 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Push --mirror to GitCode
+      # Push main explicitly rather than --mirror: a mirror push prunes refs
+      # absent from the runner clone, which tries to delete GitCode's `pages`
+      # branch (its default, built by deploy-gitcode-pages) and the whole push
+      # gets rejected.
+      - name: Push main to GitCode
         env:
           GITCODE_USERNAME: ${{ secrets.GITCODE_USERNAME }}
           GITCODE_TOKEN: ${{ secrets.GITCODE_TOKEN }}
         run: |
           git remote add gitcode \
             "https://oauth2:${GITCODE_TOKEN}@gitcode.com/${GITCODE_USERNAME}/SimonCaiIntro.git"
-          git push gitcode --mirror
+          git push --force gitcode HEAD:refs/heads/main
+          git push --force gitcode --tags
 
   deploy-gitcode-pages:
     runs-on: ubuntu-latest
