@@ -7,7 +7,7 @@ export const strings = {
     locale: 'en',
     htmlLang: 'en-AU',
     siteName: 'Zhaoxiang (Simon) Cai',
-    role: 'Cancer Data Scientist',
+    role: 'Cancer Data Scientist · CINSW Early Career Fellow',
     nav: {
       research: 'Research',
       projects: 'Projects',
@@ -41,8 +41,8 @@ export const strings = {
     },
     hero: {
       eyebrow: 'Cancer data scientist · Sydney',
-      taglinePart1: 'Senior Data Scientist at',
-      taglineMid: 'and Adjunct Lecturer at the',
+      taglinePart1: 'Cancer Institute NSW Early Career Fellow and Senior Data Scientist at',
+      taglineMid: ', and Adjunct Lecturer at the',
       taglineEnd:
         '. I build deep-learning methods — federated, generative, and transformer-based — for cancer multi-omics, aimed at translation into clinical precision oncology.',
       ctaEmail: 'Email',
@@ -155,7 +155,7 @@ export const strings = {
       label: 'About',
       title: 'Biography',
       bio: [
-        `I am a cancer data scientist working at the intersection of deep learning and large-scale molecular biology. I read Computer Science at Monash University, graduating top of my cohort, then spent several years building electronic-trading systems at Goldman Sachs before moving into cancer research. I completed my PhD in Cancer Data Science at the University of Sydney and the Children's Medical Research Institute (CMRI), where I am now a Senior Data Scientist; I also hold an Adjunct Lecturer appointment at the University of Sydney.`,
+        `I am a cancer data scientist working at the intersection of deep learning and large-scale molecular biology. I read Computer Science at Monash University, graduating top of my cohort, then spent several years building electronic-trading systems at Goldman Sachs before moving into cancer research. I completed my PhD in Cancer Data Science at the University of Sydney and the Children's Medical Research Institute (CMRI), where I am now a Cancer Institute NSW Early Career Fellow and Senior Data Scientist; I also hold an Adjunct Lecturer appointment at the University of Sydney.`,
         `My research develops federated, generative, and transformer-based deep-learning methods for cancer multi-omics. As co-first author of the *Cancer Cell* pan-cancer proteomic map of 949 human cancer cell lines, I helped build one of the field's most widely used resources. My first-author publications introduced federated deep learning for privacy-preserving cancer subtyping — the first application of federated deep learning to cancer proteomics, spanning some 7,500 proteomes (*Cancer Discovery*) — and MOSA, a generative-AI approach to synthetic augmentation of multi-omic datasets (*Nature Communications*). I maintain active international collaborations with the Wellcome Sanger Institute (UK) and the University of Lisbon (Portugal).`,
         `In 2025 I was awarded a Cancer Institute NSW Early Career Fellowship as sole chief investigator, supporting a three-year programme on proteomic foundation models integrated with federated learning for multi-hospital cancer research. Throughout, my goal is to translate advanced computational methods into practical tools that improve cancer diagnosis and prognosis through precision oncology.`,
       ],
@@ -212,7 +212,7 @@ export const strings = {
     locale: 'zh',
     htmlLang: 'zh-CN',
     siteName: '蔡兆祥 (Simon)',
-    role: '癌症数据科学家',
+    role: '癌症数据科学家 · CINSW 青年学者',
     nav: {
       research: '研究',
       projects: '项目',
@@ -246,8 +246,8 @@ export const strings = {
     },
     hero: {
       eyebrow: '癌症数据科学 · 悉尼',
-      taglinePart1: '现任',
-      taglineMid: '高级数据科学家，并担任',
+      taglinePart1: '新南威尔士州癌症研究所青年学者（CINSW Early Career Fellow），现任',
+      taglineMid: ' 高级数据科学家，并担任',
       taglineEnd:
         '医学与健康学院兼任讲师（Adjunct Lecturer）。我研究面向癌症多组学的深度学习方法，包括联邦学习、生成式模型与 Transformer 架构，致力于将其转化为可用于临床的精准肿瘤学工具。',
       ctaEmail: '邮箱',
@@ -359,7 +359,7 @@ export const strings = {
       label: '关于',
       title: '个人简介',
       bio: [
-        '我是一名癌症数据科学家，研究方向处于深度学习与大规模分子生物学的交叉领域。本科以一等荣誉学位毕业于莫纳什大学（Monash University）计算机科学专业，并获专业第一名；随后在高盛（Goldman Sachs）从事电子交易系统开发数年，之后转入癌症研究领域，于悉尼大学（University of Sydney）与儿童医学研究所（CMRI）完成癌症数据科学博士学位。现任 CMRI 高级数据科学家，并担任悉尼大学医学与健康学院兼任讲师（Adjunct Lecturer）。',
+        '我是一名癌症数据科学家，研究方向处于深度学习与大规模分子生物学的交叉领域。本科以一等荣誉学位毕业于莫纳什大学（Monash University）计算机科学专业，并获专业第一名；随后在高盛（Goldman Sachs）从事电子交易系统开发数年，之后转入癌症研究领域，于悉尼大学（University of Sydney）与儿童医学研究所（CMRI）完成癌症数据科学博士学位。现为新南威尔士州癌症研究所青年学者（CINSW Early Career Fellow）兼 CMRI 高级数据科学家，并担任悉尼大学医学与健康学院兼任讲师（Adjunct Lecturer）。',
         '我的研究聚焦面向癌症多组学的联邦学习、生成式模型与 Transformer 方法。作为发表于 *Cancer Cell* 的 949 株人类癌细胞系泛癌蛋白质组图谱研究的共同第一作者，我参与构建了该领域被广泛使用的代表性数据资源。我的第一作者工作包括：面向癌症亚型分类的隐私保护联邦深度学习框架（*Cancer Discovery*）——这是联邦深度学习在癌症蛋白质组学中的首次应用，覆盖约 7,500 个癌症蛋白质组；以及用于多组学数据合成增强的生成式 AI 方法 MOSA（*Nature Communications*）。我与英国 Wellcome Sanger Institute、葡萄牙里斯本大学（Universidade de Lisboa）等机构保持长期的国际合作。',
         '2025 年，我获颁澳大利亚新南威尔士州癌症研究所青年学者基金（Cancer Institute NSW Early Career Fellowship），以独立首席研究员身份开展为期三年的研究计划，构建结合联邦学习的蛋白质组基础模型，服务多中心癌症研究。我始终致力于将先进的计算方法转化为可临床应用的工具，通过精准肿瘤学改善癌症的诊断与预后。',
       ],
@@ -414,8 +414,8 @@ export type Strings = (typeof strings)[Lang];
 // Chinese translations for things stored in collections / data files but
 // needed when rendering the Chinese site. Keyed by English source.
 export const expRoleZh: Record<string, string> = {
-  'Senior Data Scientist - Cancer Institute NSW Fellow':
-    '高级数据科学家 · 新南威尔士州癌症研究所青年学者（CINSW Fellow）',
+  'Cancer Institute NSW Early Career Fellow · Senior Data Scientist':
+    '新南威尔士州癌症研究所青年学者（CINSW Fellow）· 高级数据科学家',
   'Adjunct Lecturer': '兼任讲师（Adjunct Lecturer）',
   'Conjoint Associate Lecturer': '联合副讲师（Conjoint Associate Lecturer）',
   'PhD Candidate': '博士研究生',

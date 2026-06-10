@@ -2,12 +2,12 @@ export const site = {
   name: 'Zhaoxiang (Simon) Cai',
   nameShort: 'Zhaoxiang Cai',
   initials: 'ZC',
-  role: 'Cancer Data Scientist',
+  role: 'Cancer Data Scientist · CINSW Early Career Fellow',
   tagline:
     'Deep learning for cancer multi-omics. Federated learning, generative models, foundation models for proteomics.',
   url: 'https://zhaoxiangsimoncai.github.io',
   description:
-    'Personal site of Dr Zhaoxiang (Simon) Cai — Senior Data Scientist at Children\u2019s Medical Research Institute and Adjunct Lecturer at the University of Sydney. Cancer multi-omics, deep learning, federated learning, generative AI.',
+    'Personal site of Dr Zhaoxiang (Simon) Cai — Cancer Institute NSW Early Career Fellow, Senior Data Scientist at Children\u2019s Medical Research Institute, and Adjunct Lecturer at the University of Sydney. Cancer multi-omics, deep learning, federated learning, generative AI.',
   email: 'zhaoxiang.cai@sydney.edu.au',
   nav: [
     { href: '/research/', label: 'Research' },
@@ -29,8 +29,8 @@ export const site = {
       name: "Children's Medical Research Institute",
       nameShort: 'CMRI',
       nameShortZh: 'CMRI',
-      role: 'Senior Data Scientist (Cancer Data Science)',
-      roleZh: '高级数据科学家（癌症数据科学）',
+      role: 'CINSW Early Career Fellow · Senior Data Scientist',
+      roleZh: 'CINSW 青年学者 · 高级数据科学家',
       url: 'https://www.cmrijeansforgenes.org.au/research/research-teams/procan',
       logo: '/logos/cmri.svg',
     },

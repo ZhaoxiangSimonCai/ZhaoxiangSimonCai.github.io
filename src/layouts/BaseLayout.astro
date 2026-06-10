@@ -18,7 +18,7 @@ const altPath = oppositePath(Astro.url.pathname);
 
 const fallbackDescription =
   lang === 'zh'
-    ? '蔡兆祥（Simon）的个人网站 —— 儿童医学研究所（CMRI）高级数据科学家、悉尼大学医学与健康学院兼任讲师（Adjunct Lecturer）。研究方向：癌症多组学、深度学习、联邦学习、生成式 AI。'
+    ? '蔡兆祥（Simon）的个人网站 —— 新南威尔士州癌症研究所青年学者（CINSW Early Career Fellow）、儿童医学研究所（CMRI）高级数据科学家、悉尼大学医学与健康学院兼任讲师（Adjunct Lecturer）。研究方向：癌症多组学、深度学习、联邦学习、生成式 AI。'
     : site.description;
 
 const {
@@ -38,7 +38,10 @@ const personSchema = {
   '@type': 'Person',
   name: site.nameShort,
   alternateName: ['Simon Cai', '蔡兆祥'],
-  jobTitle: site.role,
+  jobTitle: [
+    'Cancer Institute NSW Early Career Fellow',
+    'Senior Data Scientist (Cancer Data Science)',
+  ],
   url: site.url,
   email: site.email,
   image: new URL('/profile.jpg', Astro.site ?? site.url).toString(),
