@@ -73,7 +73,7 @@ export const serviceItems: readonly ServiceItem[] = [
     category: 'Editorial / convening',
     title: 'Cancer Data Science Journal Club',
     detail:
-      'Founder and host since 2023. Monthly forum bringing together 10–15 researchers across the ProCan initiative (Cancer Data Science, Software Engineering, and Oncology teams) for critical discussion of recent work in cancer data science, machine learning, and multi-omics analysis.',
+      'Host since 2023. Monthly forum bringing together 10–15 researchers across the ProCan initiative (Cancer Data Science, Software Engineering, and Oncology teams) for critical discussion of recent work in cancer data science, machine learning, and multi-omics analysis.',
   },
   {
     category: 'Peer review',

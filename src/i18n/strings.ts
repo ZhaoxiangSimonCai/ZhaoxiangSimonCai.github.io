@@ -562,7 +562,7 @@ export const serviceItemsZh = [
     category: '组织召集',
     title: 'ProCan 癌症数据科学期刊讨论会（Cancer Data Science Journal Club）',
     detail:
-      '自 2023 年起发起并主持，每月一次。汇集 ProCan 项目中癌症数据科学、软件工程与肿瘤学等团队的 10–15 名研究人员，共同评议癌症数据科学、机器学习与多组学领域的最新工作。',
+      '自 2023 年起主持，每月一次。汇集 ProCan 项目中癌症数据科学、软件工程与肿瘤学等团队的 10–15 名研究人员，共同评议癌症数据科学、机器学习与多组学领域的最新工作。',
   },
   {
     category: '同行评审',
