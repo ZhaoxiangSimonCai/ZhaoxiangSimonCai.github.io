@@ -28,6 +28,12 @@ export interface Award {
 export const awards: readonly Award[] = [
   {
     year: 2026,
+    title:
+      'ResetData AI-F1 Competition, national GPU compute award — Application lead (ProCan Multimodal Cancer Foundation Model)',
+    amount: '$1,000,000 in-kind GPU compute',
+  },
+  {
+    year: 2026,
     title: 'Cancer Bioinformatics Australia Symposium Travel Scholarship',
   },
   {
@@ -80,6 +86,12 @@ export const serviceItems: readonly ServiceItem[] = [
     title: 'International funding bodies',
     detail:
       'Invited external expert reviewer for grant applications to the Innovation and Technology Commission (Hong Kong, 2025) and the Dutch Research Council (NWO, Netherlands, 2025).',
+  },
+  {
+    category: 'Conference organisation',
+    title: 'Cancer Bioinformatics Australia',
+    detail:
+      'Member of the organising committee for the 2027 Cancer Bioinformatics Australia conference, the national meeting for cancer bioinformatics and computational cancer research in Australia. Contributes to programme development and the scientific direction of the meeting.',
   },
   {
     category: 'Sector engagement',

@@ -5,11 +5,13 @@
   "logo": "/logos/gs.svg",
   "location": "Melbourne",
   "dateStart": "2014-11-10",
-  "dateEnd": "2017-12-31",
+  "dateEnd": "2018-01-31",
   "current": false,
   "description": [
+    "Designed, developed, tested and deployed system solutions for the Goldman Sachs Electronic Trading (GSET) business flow",
+    "Delivered the Shenzhen-Hong Kong Stock Connect project, recognised with a Goldman Sachs Federation Award (2016)",
+    "Established the India GSET clearing clients business flow",
     "Communicated with business stakeholders and liaised regarding project scope with ongoing updates",
-    "Designed/developed/tested/deployed system solutions specialised in Goldman Sachs Electronic Trading (GSET) business flow",
     "Provided production support and maintained the health of the testing environment"
   ],
   "order": 5

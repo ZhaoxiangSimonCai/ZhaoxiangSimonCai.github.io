@@ -114,7 +114,7 @@ export const strings = {
       label: 'Publications',
       title: 'Research',
       description: (n: number) =>
-        `${n} peer-reviewed publications — 5 as first or co-first author, cited over 900 times in total. Filter by theme or browse chronologically.`,
+        `${n} peer-reviewed publications — 5 as first or co-first author, cited over 1,100 times in total. Filter by theme or browse chronologically.`,
       filterAria: 'Filter by tag',
       allCount: (n: number) => `All (${n})`,
       backToList: 'All research',
@@ -318,7 +318,7 @@ export const strings = {
       label: '论文',
       title: '研究',
       description: (n: number) =>
-        `${n} 篇同行评审论文，其中 5 篇为第一/共同第一作者，累计被引用 900 余次。可按主题筛选或按时间浏览。`,
+        `${n} 篇同行评审论文，其中 5 篇为第一/共同第一作者，累计被引用 1,100 余次。可按主题筛选或按时间浏览。`,
       filterAria: '按标签筛选',
       allCount: (n: number) => `全部 (${n})`,
       backToList: '所有研究',
@@ -453,8 +453,10 @@ export const expDescZh: Record<string, string[]> = {
     '为活细胞成像数据构建深度学习模型',
   ],
   'gs-analyst': [
-    '与业务方沟通需求，跟进项目范围与进度',
     '为高盛电子交易（GSET）业务流程设计、开发、测试并部署系统方案',
+    '主导交付深港通（Shenzhen-Hong Kong Stock Connect）项目，获高盛 Federation Award（2016）',
+    '搭建印度市场 GSET 清算客户业务流程',
+    '与业务方沟通需求，跟进项目范围与进度',
     '提供生产环境支持，维护测试环境的稳定运行',
   ],
 };
@@ -487,6 +489,12 @@ interface AwardZh {
 }
 
 export const awardsZh: readonly AwardZh[] = [
+  {
+    year: 2026,
+    title:
+      'ResetData AI-F1 全国算力竞赛（ResetData AI-F1 Competition）—— 申请负责人（ProCan 多模态癌症基础模型）',
+    amount: '$1,000,000 等值 GPU 算力',
+  },
   {
     year: 2026,
     title: '澳大利亚癌症生物信息学研讨会（Cancer Bioinformatics Australia Symposium）差旅奖学金',
@@ -567,6 +575,12 @@ export const serviceItemsZh = [
     title: '国际科研基金评审',
     detail:
       '受邀担任香港创新科技署（Innovation and Technology Commission，2025）及荷兰研究理事会（Dutch Research Council，NWO，2025）基金申请的外部评审专家。',
+  },
+  {
+    category: '会议组织',
+    title: '澳大利亚癌症生物信息学会议（Cancer Bioinformatics Australia）',
+    detail:
+      '担任 2027 年澳大利亚癌症生物信息学会议（Cancer Bioinformatics Australia）组委会成员。该会议是澳大利亚癌症生物信息学与计算肿瘤学领域的全国性学术会议，我参与会议议程设计与学术方向规划。',
   },
   {
     category: '行业参与',
