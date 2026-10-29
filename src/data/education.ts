@@ -28,6 +28,11 @@ export interface Award {
 export const awards: readonly Award[] = [
   {
     year: 2026,
+    title: 'Cancer Research Network EMCR Outstanding Publication Award',
+    amount: 'Cai et al., Cancer Discovery (2025)',
+  },
+  {
+    year: 2026,
     title:
       'ResetData AI-F1 Competition, national GPU compute award — Application lead (ProCan Multimodal Cancer Foundation Model)',
     amount: '$1,000,000 in-kind GPU compute',

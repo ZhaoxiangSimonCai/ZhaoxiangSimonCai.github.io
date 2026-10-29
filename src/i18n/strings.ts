@@ -491,6 +491,11 @@ interface AwardZh {
 export const awardsZh: readonly AwardZh[] = [
   {
     year: 2026,
+    title: 'Cancer Research Network 早中期研究员（EMCR）杰出论文奖',
+    amount: 'Cai et al.，Cancer Discovery（2025）',
+  },
+  {
+    year: 2026,
     title:
       'ResetData AI-F1 全国算力竞赛（ResetData AI-F1 Competition）—— 申请负责人（ProCan 多模态癌症基础模型）',
     amount: '$1,000,000 等值 GPU 算力',

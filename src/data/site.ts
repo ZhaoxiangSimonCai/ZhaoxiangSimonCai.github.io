@@ -64,7 +64,7 @@ export const site = {
   cv: {
     path: '/cv/zhaoxiang-cai-cv-research.pdf',
     label: 'Download CV (PDF)',
-    lastUpdated: '2026-09',
+    lastUpdated: '2026-10',
   },
 } as const;
 
