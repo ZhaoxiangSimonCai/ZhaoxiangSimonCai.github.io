@@ -2,7 +2,7 @@
 import type { CollectionEntry } from 'astro:content';
 import { Icon } from 'astro-icon/components';
 import { cleanVenue, doiUrl, formatAuthors } from '~/lib/format';
-import { getLang, withLocale, t } from '~/i18n';
+import { getLang, withLocale, t, pubAwardZh } from '~/i18n';
 
 export interface Props {
   pub: CollectionEntry<'publications'>;
@@ -20,6 +20,7 @@ const role = d.coFirstAuthor
   : d.firstAuthor
     ? tr.research.firstAuthor
     : d.role;
+const award = d.award && (lang === 'zh' ? (pubAwardZh[pub.slug] ?? d.award) : d.award);
 const authorsHtml = formatAuthors(d.authors);
 ---
 
@@ -56,6 +57,13 @@ const authorsHtml = formatAuthors(d.authors);
       <span class="chip-accent shrink-0 whitespace-nowrap">{role}</span>
     )}
   </header>
+
+  {award && (
+    <span class="chip-accent self-start rounded-md">
+      <Icon name="lucide:award" class="h-3.5 w-3.5 shrink-0" />
+      {award}
+    </span>
+  )}
 
   <p class="text-sm text-muted" set:html={authorsHtml} />
 

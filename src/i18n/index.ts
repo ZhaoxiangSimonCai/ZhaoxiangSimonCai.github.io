@@ -12,6 +12,7 @@ export {
   serviceItemsZh,
   teachingZh,
   talksZh,
+  pubAwardZh,
 } from './strings';
 
 export const LANGS: readonly Lang[] = ['en', 'zh'];

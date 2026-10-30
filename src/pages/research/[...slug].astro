@@ -49,6 +49,12 @@ const bibtex = toBibtex(pub);
       <h1 class="mt-4 font-display text-3xl font-semibold leading-tight md:text-4xl lg:text-5xl">
         {d.title}
       </h1>
+      {d.award && (
+        <span class="chip-accent mt-4 rounded-md">
+          <Icon name="lucide:award" class="h-3.5 w-3.5 shrink-0" />
+          {d.award}
+        </span>
+      )}
       <p class="mt-5 text-muted" set:html={formatAuthors(d.authors, 'Zhaoxiang Cai', 20)} />
 
       <div class="mt-8 flex flex-wrap items-center gap-2">

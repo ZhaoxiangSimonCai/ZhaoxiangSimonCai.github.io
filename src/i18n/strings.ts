@@ -719,3 +719,8 @@ export const talksZh: Record<string, TalkZh> = {
       '就发表于 Cancer Cell 的 949 株人类癌细胞系泛癌蛋白质组图谱研究接受电台采访，向公众介绍其研究意义。',
   },
 };
+
+// Chinese display strings for a publication's `award` frontmatter, keyed by slug.
+export const pubAwardZh: Record<string, string> = {
+  'cai-2025-federated': '2026 年 Cancer Research Network 早中期研究员（EMCR）杰出论文奖',
+};
