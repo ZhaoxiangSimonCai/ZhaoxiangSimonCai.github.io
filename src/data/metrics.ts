@@ -1,8 +1,8 @@
 export const metrics = {
-  hIndex: 8,
+  hIndex: 9,
   i10Index: 8,
-  totalCitations: 1166,
-  totalCitationsAsOf: '2026-09',
+  totalCitations: 1273,
+  totalCitationsAsOf: '2026-10',
   scholarUrl: 'https://scholar.google.com/citations?user=J-pGEioAAAAJ&hl=en',
   peerReviewedPapers: 10,
   firstOrCoFirstAuthor: 5,

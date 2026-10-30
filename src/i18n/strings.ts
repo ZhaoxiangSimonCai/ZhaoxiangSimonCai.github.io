@@ -114,7 +114,7 @@ export const strings = {
       label: 'Publications',
       title: 'Research',
       description: (n: number) =>
-        `${n} peer-reviewed publications — 5 as first or co-first author, cited over 1,100 times in total. Filter by theme or browse chronologically.`,
+        `${n} peer-reviewed publications — 5 as first or co-first author, cited over 1,200 times in total. Filter by theme or browse chronologically.`,
       filterAria: 'Filter by tag',
       allCount: (n: number) => `All (${n})`,
       backToList: 'All research',
@@ -318,7 +318,7 @@ export const strings = {
       label: '论文',
       title: '研究',
       description: (n: number) =>
-        `${n} 篇同行评审论文，其中 5 篇为第一/共同第一作者，累计被引用 1,100 余次。可按主题筛选或按时间浏览。`,
+        `${n} 篇同行评审论文，其中 5 篇为第一/共同第一作者，累计被引用 1,200 余次。可按主题筛选或按时间浏览。`,
       filterAria: '按标签筛选',
       allCount: (n: number) => `全部 (${n})`,
       backToList: '所有研究',
